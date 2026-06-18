@@ -1,0 +1,42 @@
+---
+type SkillGroup = {
+  name: string;
+  keywords: string[];
+};
+
+const { groups = [] } = Astro.props as { groups?: SkillGroup[] };
+---
+
+<div class="skills-grid">
+  {groups.map((group) => (
+    <section class="surface skill-group">
+      <h3>{group.name}</h3>
+      <ul class="pill-list">
+        {group.keywords.map((keyword: string) => <li class="pill">{keyword}</li>) }
+      </ul>
+    </section>
+  ))}
+</div>
+
+<style>
+  .skills-grid {
+    display: grid;
+    gap: var(--space-4);
+  }
+
+  .skill-group {
+    padding: var(--space-5, 1.25rem);
+  }
+
+  h3 {
+    margin-bottom: var(--space-4);
+    font-size: 1rem;
+    letter-spacing: -0.02em;
+  }
+
+  @media (min-width: 760px) {
+    .skills-grid {
+      grid-template-columns: repeat(3, 1fr);
+    }
+  }
+</style>

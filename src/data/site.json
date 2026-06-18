@@ -1,0 +1,28 @@
+{
+  "name": "lmever",
+  "initials": "lmever",
+  "title": "lmever",
+  "tagline": "Stories, systems, music, and tools for people who build.",
+  "description": "A story-driven personal site and content hub for lmever.",
+  "location": "",
+  "email": "",
+  "socials": [],
+  "navigation": [
+    {
+      "label": "Home",
+      "href": "/#home"
+    },
+    {
+      "label": "Favorites",
+      "href": "/favorites/"
+    },
+    {
+      "label": "Projects",
+      "href": "/projects/"
+    },
+    {
+      "label": "Blog",
+      "href": "/blog/"
+    }
+  ]
+}

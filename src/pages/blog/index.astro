@@ -1,0 +1,42 @@
+---
+import { getCollection } from 'astro:content';
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import Container from '../../components/ui/Container.astro';
+import PostPreview from '../../components/shared/PostPreview.astro';
+
+const posts = (await getCollection('posts'))
+  .filter((post) => !post.data.draft);
+---
+
+<BaseLayout title="Notes" description="Short essays, project notes, and learning logs.">
+  <Container>
+    <section class="page-hero">
+      <p class="kicker">Notes</p>
+      <h1>Writing in public, one note at a time.</h1>
+      <p>Use this space for technical notes, project logs, reading reflections, and longer essays.</p>
+    </section>
+
+    <div class="posts-list">
+      {posts.map((post) => <PostPreview post={post} />)}
+    </div>
+  </Container>
+</BaseLayout>
+
+<style>
+  .page-hero {
+    max-width: 860px;
+    padding: var(--space-16) 0 var(--space-12);
+  }
+
+  .page-hero h1 {
+    margin-bottom: var(--space-6);
+  }
+
+  .page-hero p:not(.kicker) {
+    font-size: clamp(1.05rem, 2vw, 1.25rem);
+  }
+
+  .posts-list {
+    max-width: 920px;
+  }
+</style>

@@ -1,0 +1,53 @@
+---
+import Header from '../components/layout/Header.astro';
+import Footer from '../components/layout/Footer.astro';
+import site from '../data/site.json';
+import '../styles/global.css';
+
+const {
+  title = site.title,
+  description = site.description,
+} = Astro.props;
+const pageTitle = title === site.title ? title : `${title} · ${site.name}`;
+---
+
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="description" content={description} />
+    <meta name="generator" content={Astro.generator} />
+    <meta property="og:title" content={pageTitle} />
+    <meta property="og:description" content={description} />
+    <meta property="og:type" content="website" />
+    <link rel="icon" href="/favicon.svg" />
+    <title>{pageTitle}</title>
+  </head>
+  <body>
+    <div class="starfield" aria-hidden="true">
+      <canvas id="webgl-starfield" class="webgl-starfield"></canvas>
+      <span class="nebula nebula-a"></span>
+      <span class="nebula nebula-b"></span>
+      <span class="nebula nebula-c"></span>
+      <span class="star-layer star-layer-near"></span>
+      <span class="star-layer star-layer-mid"></span>
+      <span class="star-layer star-layer-far"></span>
+      <span class="milky-way"></span>
+      <span class="shooting-star shooting-star-a"></span>
+      <span class="shooting-star shooting-star-b"></span>
+      <span class="shooting-star shooting-star-c"></span>
+    </div>
+    <div class="ambient" aria-hidden="true">
+      <span class="ambient-orb ambient-orb-a"></span>
+      <span class="ambient-orb ambient-orb-b"></span>
+      <span class="ambient-orb ambient-orb-c"></span>
+      <span class="ambient-grid"></span>
+    </div>
+    <Header />
+    <main>
+      <slot />
+    </main>
+    <Footer />
+  </body>
+</html>

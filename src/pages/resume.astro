@@ -1,0 +1,111 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import Container from '../components/ui/Container.astro';
+import Section from '../components/ui/Section.astro';
+import TimelineItem from '../components/shared/TimelineItem.astro';
+import SkillList from '../components/shared/SkillList.astro';
+import resume from '../data/resume.json';
+---
+
+<BaseLayout title="Resume" description={resume.basics.summary}>
+  <Container>
+    <section class="page-hero">
+      <p class="kicker">Resume</p>
+      <h1>{resume.basics.name}</h1>
+      <p>{resume.basics.summary}</p>
+      {(resume.basics.email || resume.basics.location || resume.basics.url) && (
+        <dl class="contact-list">
+          {resume.basics.email && (
+            <div>
+              <dt>Email</dt>
+              <dd><a href={`mailto:${resume.basics.email}`}>{resume.basics.email}</a></dd>
+            </div>
+          )}
+          {resume.basics.location && (
+            <div>
+              <dt>Location</dt>
+              <dd>{resume.basics.location}</dd>
+            </div>
+          )}
+          {resume.basics.url && (
+            <div>
+              <dt>Website</dt>
+              <dd><a href={resume.basics.url}>{resume.basics.url}</a></dd>
+            </div>
+          )}
+        </dl>
+      )}
+    </section>
+
+    <Section kicker="Experience" title="Work">
+      <div class="timeline">
+        {resume.work.map((item) => (
+          <TimelineItem
+            title={item.position}
+            subtitle={item.company}
+            highlights={item.highlights}
+          >
+            <p>{item.summary}</p>
+          </TimelineItem>
+        ))}
+      </div>
+    </Section>
+
+    <Section kicker="Education" title="Study">
+      <div class="timeline">
+        {resume.education.map((item) => (
+          <TimelineItem
+            title={item.institution}
+            subtitle={`${item.studyType}, ${item.area}`}
+          />
+        ))}
+      </div>
+    </Section>
+
+    <Section kicker="Capabilities" title="Skills">
+      <SkillList groups={resume.skills} />
+    </Section>
+  </Container>
+</BaseLayout>
+
+<style>
+  .page-hero {
+    padding: var(--space-16) 0 var(--space-12);
+  }
+
+  .page-hero h1 {
+    margin-bottom: var(--space-6);
+  }
+
+  .page-hero > p:not(.kicker) {
+    max-width: var(--content);
+    font-size: clamp(1.05rem, 2vw, 1.25rem);
+  }
+
+  .contact-list {
+    display: grid;
+    gap: var(--space-4);
+    margin: var(--space-8) 0 0;
+  }
+
+  .contact-list div {
+    border-top: 1px solid var(--color-border);
+    padding-top: var(--space-4);
+  }
+
+  dt {
+    color: var(--color-subtle);
+    font-family: var(--font-mono);
+    font-size: 0.78rem;
+  }
+
+  dd {
+    margin: var(--space-1) 0 0;
+  }
+
+  @media (min-width: 760px) {
+    .contact-list {
+      grid-template-columns: repeat(3, 1fr);
+    }
+  }
+</style>

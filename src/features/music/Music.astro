@@ -1,0 +1,166 @@
+---
+// Music Section - Full width layout
+---
+
+<div id="music" class="music-section">
+  <!-- Text Block - Top center, full width -->
+  <div class="music-text-banner">
+    <p>I like all kinds of music. Although I don't have much musical talent, I've tried different things in music. I pursue the poetry and uncertainty in music.</p>
+  </div>
+
+  <!-- Three images below - evenly spaced -->
+  <div class="music-images-row">
+    <!-- Piano -->
+    <article class="music-image-card">
+      <div class="card-inner">
+        <img src="/photos/piano.png" alt="Piano" />
+        <div class="image-overlay">
+          <span>Obsessed with piano after watching The Legend of 1900 as a teen. Still chasing the skill to play it smoothly.</span>
+        </div>
+      </div>
+    </article>
+
+    <!-- Guzheng -->
+    <article class="music-image-card">
+      <div class="card-inner">
+        <img src="/photos/guzheng.png" alt="Guzheng" />
+        <div class="image-overlay">
+          <span>Warm oriental guqin still life. Adds tranquil artistic texture to my personal site's bright dark UI.</span>
+        </div>
+      </div>
+    </article>
+
+    <!-- Gramophone -->
+    <article class="music-image-card">
+      <div class="card-inner">
+        <img src="/photos/gramophone.png" alt="Gramophone" />
+        <div class="image-overlay">
+          <span>A warm-toned vinyl record player. Conveying my love for the timeless analog sound.</span>
+        </div>
+      </div>
+    </article>
+  </div>
+</div>
+
+<style>
+  .music-section {
+    width: 100%;
+    line-height: 1.6;
+    color: #1a1a1a;
+  }
+
+  /* Text Banner - Top center, full width */
+  .music-text-banner {
+    background: var(--color-bg, #ffffff);
+    border: 1px solid var(--color-border, rgba(229, 231, 235, 0.8));
+    border-radius: var(--radius-lg, 16px);
+    padding: var(--space-8) var(--space-12);
+    text-align: center;
+    margin-bottom: var(--space-4);
+    box-shadow: inset 1px 1px 0 rgba(255, 255, 255, 0.8);
+  }
+
+  .music-text-banner p {
+    max-width: 800px;
+    margin: 0 auto;
+    font-size: 1.1rem;
+    color: #4b5563;
+    line-height: 1.8;
+  }
+
+  /* Three images row - evenly distributed */
+  .music-images-row {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: var(--space-4);
+  }
+
+  .music-image-card {
+    border-radius: var(--radius-md, 12px);
+    overflow: hidden;
+    background: linear-gradient(135deg, rgba(59, 130, 246, 0.08), rgba(16, 185, 129, 0.05));
+    aspect-ratio: 16 / 10;
+    cursor: pointer;
+    transition: transform 220ms ease, box-shadow 220ms ease;
+    box-shadow: inset 1px 1px 0 rgba(255, 255, 255, 0.8);
+  }
+
+  .card-inner {
+    position: relative;
+    width: 100%;
+    height: 100%;
+  }
+
+  .card-inner img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    transition: filter 0.25s ease, transform 0.25s ease;
+    display: block;
+  }
+
+  .image-overlay {
+    position: absolute;
+    inset: 0;
+    display: flex;
+    align-items: center;
+    padding: 1.5rem;
+    background: rgba(0, 0, 0, 0);
+    opacity: 0;
+    transition: all 0.25s ease;
+    pointer-events: none;
+  }
+
+  .image-overlay span {
+    color: rgba(255, 255, 255, 0.9);
+    font-size: 0.85rem;
+    line-height: 1.6;
+    transform: translateY(6px);
+    transition: transform 0.25s ease;
+  }
+
+  /* Hover Effect */
+  .music-image-card:hover {
+    transform: translateY(-6px);
+    box-shadow: 0 25px 80px rgba(59, 130, 246, 0.12), inset 1px 1px 0 rgba(255, 255, 255, 0.9);
+  }
+
+  .music-image-card:hover .card-inner img {
+    filter: blur(2px) brightness(0.45);
+    transform: scale(1.04);
+  }
+
+  .music-image-card:hover .image-overlay {
+    opacity: 1;
+    background: rgba(0, 0, 0, 0.55);
+  }
+
+  .music-image-card:hover .image-overlay span {
+    transform: translateY(0);
+  }
+
+  /* Responsive */
+  @media (max-width: 900px) {
+    .music-images-row {
+      grid-template-columns: repeat(2, 1fr);
+    }
+
+    .music-text-banner {
+      padding: var(--space-6) var(--space-8);
+    }
+  }
+
+  @media (max-width: 640px) {
+    .music-images-row {
+      grid-template-columns: 1fr;
+    }
+
+    .music-text-banner {
+      padding: var(--space-6) var(--space-6);
+    }
+
+    .music-text-banner p {
+      font-size: 1rem;
+    }
+  }
+</style>

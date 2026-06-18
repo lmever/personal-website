@@ -1,0 +1,153 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import Container from '../components/ui/Container.astro';
+
+const categories = ['Code', 'Music', 'Books', 'Podcasts', 'Documentaries'];
+
+const favorites = [
+  {
+    category: 'Code',
+    title: 'Agentic workflows',
+    impact: 'Helped me think about software as a sequence of observable decisions rather than a single black-box answer.',
+  },
+  {
+    category: 'Music',
+    title: 'Generative music systems',
+    impact: 'Connected creative taste with technical systems, especially around model orchestration and audio tooling.',
+  },
+  {
+    category: 'Books',
+    title: 'Systems thinking',
+    impact: 'Shaped how I organize scattered work into reusable structures, notes, and tools.',
+  },
+  {
+    category: 'Podcasts',
+    title: 'Independent builders',
+    impact: 'Reinforced the value of shipping small, useful things while keeping a long-term creative direction.',
+  },
+  {
+    category: 'Documentaries',
+    title: 'Space and observation',
+    impact: 'Gave me a visual language for scale, curiosity, and the feeling of looking beyond the immediate task.',
+  },
+];
+---
+
+<BaseLayout title="Favorites" description="Books, music, podcasts, and ideas that shaped lmever.">
+  <Container>
+    <section class="favorites-hero">
+      <p class="eyebrow">Inspirations</p>
+      <h1>Ideas that light the path</h1>
+      <p>
+        A growing index of books, podcasts, documentaries, music, and technical references that shape my taste, values, and creative direction.
+      </p>
+    </section>
+
+    <nav class="category-nav surface" aria-label="Favorite categories">
+      {categories.map((category) => <a href={`#${category.toLowerCase()}`}>{category}</a>)}
+    </nav>
+
+    <section class="favorites-grid" aria-label="Favorite items">
+      {favorites.map((item) => (
+        <article id={item.category.toLowerCase()} class="favorite-card surface">
+          <span>{item.category}</span>
+          <h2>{item.title}</h2>
+          <p>{item.impact}</p>
+        </article>
+      ))}
+    </section>
+  </Container>
+</BaseLayout>
+
+<style>
+  .favorites-hero {
+    padding: var(--space-16) 0 var(--space-12);
+  }
+
+  .eyebrow,
+  .favorite-card span {
+    color: var(--color-accent);
+    font-family: var(--font-mono);
+    font-size: 0.76rem;
+    font-weight: 800;
+    letter-spacing: 0.16em;
+    text-transform: uppercase;
+  }
+
+  .favorites-hero h1 {
+    margin-bottom: var(--space-6);
+    font-size: clamp(1.1rem, 2.5vw, 2.2rem);
+    color: var(--color-text-heading);
+    font-family: var(--font-sans);
+    white-space: nowrap;
+  }
+
+  .favorites-hero p {
+    max-width: 720px;
+    font-size: clamp(1.05rem, 2vw, 1.2rem);
+    color: var(--color-text-body);
+    font-family: var(--font-sans);
+  }
+
+  .category-nav {
+    position: sticky;
+    top: 6rem;
+    z-index: 4;
+    display: flex;
+    flex-wrap: wrap;
+    gap: var(--space-2);
+    margin-bottom: var(--space-8);
+    padding: 0.5rem;
+  }
+
+  .category-nav a {
+    border-radius: 999px;
+    padding: 0.65rem 0.9rem;
+    color: var(--color-muted);
+    font-family: var(--font-mono);
+    font-size: 0.78rem;
+    text-decoration: none;
+  }
+
+  .category-nav a:hover {
+    background: rgba(143, 211, 255, 0.12);
+    color: var(--color-text);
+  }
+
+  .favorites-grid {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: var(--space-4);
+    padding-bottom: var(--space-16);
+  }
+
+  .favorite-card {
+    min-height: 260px;
+    padding: var(--space-6);
+    transition: transform 220ms ease, border-color 220ms ease, box-shadow 220ms ease;
+  }
+
+  .favorite-card:hover {
+    transform: translateY(-8px);
+    border-color: rgba(255, 255, 255, 0.26);
+    box-shadow: 0 34px 110px rgba(72, 95, 190, 0.24), inset 0 1px 0 rgba(255, 255, 255, 0.14);
+  }
+
+  .favorite-card h2 {
+    margin: var(--space-8) 0 var(--space-4);
+    font-size: clamp(1.7rem, 3vw, 3rem);
+    color: var(--color-text-heading);
+    font-family: var(--font-sans);
+  }
+
+  .favorite-card p {
+    color: var(--color-text-body);
+    font-family: var(--font-sans);
+  }
+
+  @media (max-width: 760px) {
+    .favorites-grid {
+      grid-template-columns: 1fr;
+    }
+  }
+</style>

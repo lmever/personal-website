@@ -1,0 +1,519 @@
+:root {
+  /* ============================================
+     钢琴配色浅色主题 - Piano Inspired Light Theme
+     ============================================ */
+  color-scheme: light;
+
+  /* 基底背景 - Base Backgrounds (浅灰为主) */
+  --color-bg: #f5f5f7;                    /* 浅灰主背景 - 钢琴琴身质感 */
+  --color-bg-soft: #fafafa;               /* 更浅的灰白 - 琴键白 */
+  --color-surface: #ffffff;               /* 纯白卡片 */
+  --color-surface-soft: rgba(255, 255, 255, 0.8); /* 半透明白 */
+  --color-section-bg: #f0f2f5;            /* 分区浅灰底色 */
+
+  /* 主强调色 - Primary Accents (蓝绿为辅) */
+  --color-accent: #3b82f6;                /* 柔和钢琴蓝 - 主要交互色 */
+  --color-accent-strong: #10b981;         /* 翡翠绿 - 次级高亮 */
+  --color-accent-soft: rgba(59, 130, 246, 0.1); /* 淡蓝柔光 */
+
+  /* 点缀色 - Accent Colors */
+  --color-gold: #c9a962;                  /* 钢琴铜金 - 优雅点缀 */
+  --color-gold-soft: rgba(201, 169, 98, 0.15); /* 金色柔光 */
+
+  /* 文本色系 - Text Colors (钢琴黑白灰) */
+  --color-text: #1a1a1a;                  /* 纯黑 - 标题 (琴键黑) */
+  --color-text-body: #4b5563;             /* 深灰 - 正文 */
+  --color-muted: #6b7280;                 /* 中灰 - 辅助小字 */
+  --color-subtle: #9ca3af;                /* 浅灰 - 最淡辅助 */
+
+  /* 边框分割线 - Borders */
+  --color-border: rgba(229, 231, 235, 0.8); /* 浅灰边框 */
+  --color-border-soft: rgba(229, 231, 235, 0.5); /* 更淡分割线 */
+
+  /* 渐变色库 - Gradient Library */
+  --gradient-piano: linear-gradient(135deg, #1a1a1a 0%, #374151 100%); /* 钢琴黑渐变 */
+  --gradient-ocean: linear-gradient(135deg, #3b82f6 0%, #10b981 100%); /* 蓝绿渐变 */
+  --gradient-sunrise: linear-gradient(135deg, #c9a962 0%, #3b82f6 100%); /* 金蓝渐变 */
+  --gradient-env: linear-gradient(180deg, #f5f5f7 0%, #ffffff 100%); /* 环境渐变 */
+
+  /* 统一光影系统 - Lighting System (钢琴烤漆质感) */
+  --shadow-toplight: inset 1px 1px 0 rgba(255, 255, 255, 0.9);
+  --shadow-card:
+    0 10px 40px rgba(0, 0, 0, 0.08),      /* 柔和底部阴影 */
+    0 2px 8px rgba(0, 0, 0, 0.04),        /* 轻微阴影 */
+    inset 1px 1px 0 rgba(255, 255, 255, 0.9); /* 顶部高光 */
+  --shadow-card-hover:
+    0 20px 60px rgba(59, 130, 246, 0.12), /* 蓝色柔光 */
+    0 8px 20px rgba(0, 0, 0, 0.08),        /* 加深阴影 */
+    inset 1px 1px 0 rgba(255, 255, 255, 1);
+  --shadow-soft: 0 20px 60px rgba(0, 0, 0, 0.06);
+  --shadow-glow-blue: 0 0 30px rgba(59, 130, 246, 0.2);
+  --shadow-glow-green: 0 0 30px rgba(16, 185, 129, 0.2);
+
+  /* 圆角规范 - Radius System */
+  --radius-xl: 24px;     /* 大区块 */
+  --radius-lg: 16px;     /* 卡片 */
+  --radius-md: 10px;      /* 按钮 */
+  --radius-sm: 8px;      /* 标签 */
+  --radius: 30px;        /* 默认 - 保持兼容 */
+
+  /* 排版 - Typography */
+  --font-sans: Inter, ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+  --font-mono: "SFMono-Regular", Consolas, "Liberation Mono", monospace;
+
+  /* 布局 - Layout */
+  --container: 1120px;
+  --content: 720px;
+
+  /* 间距 - Spacing */
+  --space-1: 0.25rem;
+  --space-2: 0.5rem;
+  --space-3: 0.75rem;
+  --space-4: 1rem;
+  --space-6: 1.5rem;
+  --space-8: 2rem;
+  --space-12: 3rem;
+  --space-16: 4rem;
+  --space-24: 6rem;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+html {
+  scroll-behavior: smooth;
+  background: var(--color-bg);
+}
+
+body {
+  position: relative;
+  margin: 0;
+  min-height: 100vh;
+  overflow-x: hidden;
+  /* 浅灰基底 + 细微渐变 */
+  background:
+    radial-gradient(circle at 12% 12%, rgba(59, 130, 246, 0.04), transparent 30rem),
+    radial-gradient(circle at 88% 88%, rgba(16, 185, 129, 0.04), transparent 30rem),
+    linear-gradient(180deg, #f5f5f7 0%, #ffffff 100%);
+  color: var(--color-text-body);
+  font-family: var(--font-sans);
+  font-size: 16px;
+  line-height: 1.7;
+  text-rendering: optimizeLegibility;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+body::before,
+body::after {
+  content: "";
+  position: fixed;
+  inset: 0;
+  pointer-events: none;
+}
+
+body::before {
+  z-index: -1;
+  /* 极细微网格 - 钢琴烤漆纹理感 */
+  background-image:
+    linear-gradient(rgba(0, 0, 0, 0.015) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(0, 0, 0, 0.015) 1px, transparent 1px);
+  background-size: 44px 44px;
+  mask-image: radial-gradient(circle at 50% 30%, rgba(0, 0, 0, 0.5), transparent 78%);
+}
+
+body::after {
+  z-index: -1;
+  /* 顶部高光 - 模拟钢琴漆面反光 */
+  background:
+    linear-gradient(180deg, rgba(255, 255, 255, 0.5) 0%, transparent 20%);
+  opacity: 0.8;
+}
+
+img,
+picture,
+svg {
+  display: block;
+  max-width: 100%;
+}
+
+a {
+  color: inherit;
+  text-decoration-color: rgba(59, 130, 246, 0.3);
+  text-decoration-thickness: 1px;
+  text-underline-offset: 0.22em;
+  transition: color 180ms ease, text-decoration-color 180ms ease, border-color 180ms ease, background 180ms ease, transform 180ms ease, box-shadow 180ms ease;
+}
+
+a:hover {
+  color: var(--color-accent);
+  text-decoration-color: currentColor;
+}
+
+button,
+input,
+textarea,
+select {
+  font: inherit;
+}
+
+:focus-visible {
+  outline: 2px solid var(--color-accent);
+  outline-offset: 4px;
+}
+
+::selection {
+  background: rgba(59, 130, 246, 0.2);
+  color: var(--color-text);
+}
+
+h1,
+h2,
+h3,
+p {
+  margin-top: 0;
+}
+
+h1,
+h2,
+h3 {
+  letter-spacing: -0.055em;
+  line-height: 0.98;
+  color: var(--color-text); /* 纯黑标题 */
+}
+
+h1 {
+  max-width: 11ch;
+  font-size: clamp(4rem, 10vw, 9rem);
+  /* 钢琴渐变文字 - 黑到深蓝 */
+  background: linear-gradient(135deg, #1a1a1a 0%, #3b82f6 50%, #10b981 100%);
+  background-clip: text;
+  -webkit-background-clip: text;
+  color: transparent;
+}
+
+h2 {
+  font-size: clamp(2.4rem, 5vw, 5.4rem);
+}
+
+h3 {
+  font-size: clamp(1.25rem, 2.2vw, 1.7rem);
+}
+
+p {
+  color: var(--color-muted);
+}
+
+main {
+  min-height: 70vh;
+}
+
+section[id] {
+  scroll-margin-top: 7rem;
+}
+
+.prose {
+  max-width: var(--content);
+}
+
+.prose p,
+.prose li {
+  color: var(--color-muted);
+}
+
+.prose h2,
+.prose h3 {
+  margin-top: var(--space-12);
+}
+
+/* 星空背景层 - 浅色版本 */
+.starfield {
+  position: fixed;
+  inset: 0;
+  z-index: -5;
+  overflow: hidden;
+  /* 浅灰白基底 */
+  background:
+    radial-gradient(ellipse at 48% 112%, rgba(59, 130, 246, 0.06), transparent 54%),
+    linear-gradient(180deg, #f5f5f7 0%, #ffffff 52%, #fafafa 100%);
+  pointer-events: none;
+}
+
+.starfield::before,
+.starfield::after {
+  content: "";
+  position: absolute;
+  inset: -20%;
+  pointer-events: none;
+}
+
+.starfield::before {
+  /* 蓝绿星云淡彩 */
+  background:
+    radial-gradient(ellipse at 22% 26%, rgba(59, 130, 246, 0.06), transparent 18%),
+    radial-gradient(ellipse at 72% 72%, rgba(16, 185, 129, 0.05), transparent 20%),
+    radial-gradient(ellipse at 58% 38%, rgba(201, 169, 98, 0.04), transparent 28%);
+  filter: blur(22px) saturate(1.2);
+  opacity: 0.9;
+  animation: sky-photo-pan 64s ease-in-out infinite alternate;
+}
+
+.starfield::after {
+  /* 顶部高光 */
+  background: linear-gradient(108deg, transparent 16%, rgba(255, 255, 255, 0.8) 32%, rgba(59, 130, 246, 0.03) 44%, rgba(16, 185, 129, 0.02) 56%, transparent 74%);
+  filter: blur(8px);
+  opacity: 0.8;
+  transform: rotate(-4deg);
+  animation: dust-lane-flow 52s ease-in-out infinite alternate;
+}
+
+.webgl-starfield {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  opacity: 0.06;
+  mix-blend-mode: multiply;
+}
+
+.star-layer,
+.nebula,
+.milky-way,
+.shooting-star {
+  position: absolute;
+  display: block;
+  pointer-events: none;
+}
+
+.star-layer {
+  inset: -18%;
+  background-repeat: repeat;
+  opacity: 0.12;
+  will-change: transform, opacity;
+  mix-blend-mode: multiply;
+}
+
+.star-layer-near {
+  background-image:
+    radial-gradient(circle, rgba(59, 130, 246, 0.5) 0 1px, transparent 1.8px),
+    radial-gradient(circle, rgba(16, 185, 129, 0.4) 0 1.1px, transparent 1.9px),
+    radial-gradient(circle, rgba(201, 169, 98, 0.3) 0 1px, transparent 1.7px);
+  background-position: 0 0, 58px 96px, 124px 34px;
+  background-size: 220px 220px, 340px 340px, 420px 420px;
+  animation: star-flow-near 38s linear infinite, star-twinkle 5.6s ease-in-out infinite alternate;
+}
+
+.star-layer-mid {
+  background-image:
+    radial-gradient(circle, rgba(201, 169, 98, 0.25) 0 0.9px, transparent 1.5px),
+    radial-gradient(circle, rgba(59, 130, 246, 0.3) 0 0.9px, transparent 1.6px);
+  background-position: 20px 30px, 140px 82px;
+  background-size: 280px 280px, 460px 460px;
+  opacity: 0.1;
+  animation: star-flow-mid 72s linear infinite, star-twinkle 7.5s ease-in-out infinite alternate-reverse;
+}
+
+.star-layer-far {
+  background-image:
+    radial-gradient(circle, rgba(26, 26, 26, 0.15) 0 0.75px, transparent 1.4px),
+    radial-gradient(circle, rgba(59, 130, 246, 0.12) 0 0.8px, transparent 1.5px);
+  background-position: 80px 120px, 8px 42px;
+  background-size: 360px 360px, 560px 560px;
+  opacity: 0.08;
+  animation: star-flow-far 116s linear infinite;
+}
+
+.nebula {
+  width: 58vw;
+  height: 58vw;
+  min-width: 32rem;
+  min-height: 32rem;
+  border-radius: 999px;
+  filter: blur(58px) saturate(1.2);
+  opacity: 0.4;
+  will-change: transform, opacity;
+}
+
+.nebula-a {
+  top: -20rem;
+  left: -18rem;
+  /* 淡蓝星云 */
+  background: radial-gradient(ellipse at 36% 34%, rgba(59, 130, 246, 0.15), transparent 28%), radial-gradient(ellipse at 62% 56%, rgba(16, 185, 129, 0.1), transparent 42%);
+  animation: nebula-drift-a 34s ease-in-out infinite alternate;
+}
+
+.nebula-b {
+  top: 3rem;
+  right: -24rem;
+  /* 淡绿星云 */
+  background: radial-gradient(ellipse at 48% 45%, rgba(16, 185, 129, 0.12), transparent 34%), radial-gradient(ellipse at 38% 60%, rgba(59, 130, 246, 0.08), transparent 48%);
+  animation: nebula-drift-b 42s ease-in-out infinite alternate;
+}
+
+.nebula-c {
+  bottom: -28rem;
+  left: 12%;
+  /* 淡金星云 */
+  background: radial-gradient(ellipse at 50% 40%, rgba(201, 169, 98, 0.1), transparent 30%), radial-gradient(ellipse at 56% 62%, rgba(59, 130, 246, 0.06), transparent 48%);
+  animation: nebula-drift-c 48s ease-in-out infinite alternate;
+}
+
+.milky-way {
+  top: -24%;
+  left: -16%;
+  width: 140%;
+  height: 78%;
+  transform: rotate(-16deg);
+  border-radius: 50%;
+  /* 银河光带 - 蓝绿金混合 */
+  background: radial-gradient(ellipse at 45% 52%, rgba(59, 130, 246, 0.08) 0%, rgba(16, 185, 129, 0.06) 14%, rgba(201, 169, 98, 0.04) 32%, transparent 64%);
+  filter: blur(16px) saturate(1.2);
+  opacity: 0.6;
+  animation: galaxy-breathe 26s ease-in-out infinite alternate;
+}
+
+.shooting-star {
+  width: 16rem;
+  height: 2px;
+  border-radius: 999px;
+  /* 流星渐变 - 蓝到绿 */
+  background: linear-gradient(90deg, transparent, rgba(59, 130, 246, 0.4), rgba(16, 185, 129, 0.3), transparent);
+  opacity: 0;
+  transform: rotate(-28deg) translate3d(0, 0, 0);
+}
+
+.shooting-star-a { top: 16%; left: -18rem; animation: shooting-star 8.5s ease-in-out infinite; }
+.shooting-star-b { top: 38%; left: -22rem; animation: shooting-star 11s ease-in-out 3.2s infinite; }
+.shooting-star-c { top: 64%; left: -20rem; animation: shooting-star 13s ease-in-out 6.4s infinite; }
+
+.ambient {
+  position: fixed;
+  inset: 0;
+  z-index: -2;
+  overflow: hidden;
+  pointer-events: none;
+}
+
+.ambient-orb {
+  position: absolute;
+  display: block;
+  width: 34rem;
+  height: 34rem;
+  border-radius: 999px;
+  filter: blur(46px);
+  opacity: 0.35;
+  mix-blend-mode: multiply;
+  animation: float-orb 18s ease-in-out infinite alternate;
+}
+
+.ambient-orb-a { top: -8rem; left: -9rem; background: radial-gradient(circle, rgba(59, 130, 246, 0.15), transparent 68%); }
+.ambient-orb-b { top: 20rem; right: -12rem; background: radial-gradient(circle, rgba(16, 185, 129, 0.12), transparent 70%); animation-duration: 22s; animation-delay: -4s; }
+.ambient-orb-c { bottom: -14rem; left: 34%; width: 40rem; height: 40rem; background: radial-gradient(circle, rgba(201, 169, 98, 0.1), transparent 72%); animation-duration: 26s; animation-delay: -8s; }
+
+.ambient-grid {
+  position: absolute;
+  inset: auto 6vw 8vh auto;
+  width: min(34vw, 26rem);
+  aspect-ratio: 1;
+  border: 1px solid rgba(59, 130, 246, 0.08);
+  border-radius: 40% 60% 58% 42%;
+  background: linear-gradient(135deg, rgba(59, 130, 246, 0.03), transparent), repeating-linear-gradient(90deg, rgba(59, 130, 246, 0.02) 0 1px, transparent 1px 18px);
+  opacity: 0.5;
+  animation: morph 20s ease-in-out infinite alternate;
+}
+
+.kicker,
+.eyebrow {
+  color: var(--color-accent);
+  font-family: var(--font-mono);
+}
+
+.muted {
+  color: var(--color-muted);
+}
+
+.grid {
+  display: grid;
+  gap: var(--space-6);
+}
+
+.surface {
+  position: relative;
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-xl);
+  /* 纯白卡片 - 钢琴琴键白质感 */
+  background: var(--color-surface);
+  box-shadow: var(--shadow-card);
+  transition: all 0.3s ease;
+}
+
+.surface::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  border-radius: inherit;
+  /* 顶部高光 - 模拟钢琴漆面光泽 */
+  background:
+    linear-gradient(135deg, rgba(255, 255, 255, 0.95) 0%, transparent 32%),
+    linear-gradient(315deg, rgba(201, 169, 98, 0.05) 0%, transparent 40%);
+  opacity: 0.9;
+  pointer-events: none;
+}
+
+.surface:hover {
+  box-shadow: var(--shadow-card-hover);
+  border-color: rgba(59, 130, 246, 0.2);
+  transform: translateY(-2px);
+}
+
+.pill-list {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--space-2);
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.pill {
+  border: 1px solid var(--color-border);
+  border-radius: 999px;
+  padding: 0.32rem 0.78rem;
+  background: var(--color-bg-soft);
+  color: var(--color-muted);
+  font-family: var(--font-mono);
+  font-size: 0.78rem;
+  transition: all 0.2s ease;
+}
+
+.pill:hover {
+  background: var(--color-accent-soft);
+  border-color: var(--color-accent);
+  color: var(--color-accent);
+}
+
+@keyframes sky-photo-pan { from { transform: translate3d(-2%, -1%, 0) scale(1); } to { transform: translate3d(3%, 2%, 0) scale(1.08); } }
+@keyframes dust-lane-flow { from { transform: rotate(-4deg) translateX(-3%); } to { transform: rotate(-2deg) translateX(3%); } }
+@keyframes star-flow-near { from { transform: translate3d(0, 0, 0) scale(1.02) rotate(0deg); } to { transform: translate3d(14rem, 20rem, 0) scale(1.025) rotate(0.8deg); } }
+@keyframes star-flow-mid { from { transform: translate3d(0, 0, 0) scale(1.04) rotate(0deg); } to { transform: translate3d(10rem, 15rem, 0) scale(1.045) rotate(-0.6deg); } }
+@keyframes star-flow-far { from { transform: translate3d(0, 0, 0) scale(1.06) rotate(0deg); } to { transform: translate3d(8rem, 11rem, 0) scale(1.065) rotate(0.35deg); } }
+@keyframes star-twinkle { 0% { opacity: 0.06; } 48% { opacity: 0.15; } 100% { opacity: 0.08; } }
+@keyframes nebula-drift-a { from { transform: translate3d(0, 0, 0) rotate(0deg) scale(1); } to { transform: translate3d(7vw, 5vh, 0) rotate(12deg) scale(1.1); } }
+@keyframes nebula-drift-b { from { transform: translate3d(0, 0, 0) rotate(0deg) scale(1.02); } to { transform: translate3d(-8vw, 9vh, 0) rotate(-10deg) scale(1.14); } }
+@keyframes nebula-drift-c { from { transform: translate3d(0, 0, 0) rotate(0deg) scale(1); } to { transform: translate3d(5vw, -7vh, 0) rotate(8deg) scale(1.12); } }
+@keyframes galaxy-breathe { from { transform: rotate(-16deg) translate3d(-2%, -1%, 0) scale(1); opacity: 0.4; } to { transform: rotate(-13deg) translate3d(2%, 3%, 0) scale(1.08); opacity: 0.6; } }
+@keyframes shooting-star { 0%, 68% { opacity: 0; transform: rotate(-28deg) translate3d(0, 0, 0); } 72% { opacity: 0.5; } 82%, 100% { opacity: 0; transform: rotate(-28deg) translate3d(150vw, 36vh, 0); } }
+@keyframes float-orb { from { transform: translate3d(0, 0, 0) scale(1); } to { transform: translate3d(2rem, -1.5rem, 0) scale(1.08); } }
+@keyframes morph { from { transform: rotate(0deg) translateY(0); border-radius: 40% 60% 58% 42%; } to { transform: rotate(9deg) translateY(-1rem); border-radius: 62% 38% 42% 58%; } }
+
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    scroll-behavior: auto !important;
+    transition-duration: 0.01ms !important;
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+  }
+}

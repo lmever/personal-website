@@ -1,0 +1,80 @@
+{
+  "basics": {
+    "name": "lmever",
+    "label": "AI Agent / DevOps / Technical Support",
+    "email": "",
+    "url": "",
+    "location": "",
+    "summary": "I build practical AI-agent and automation systems, with experience across enterprise technical support, DevOps operations, data workflows, and business-facing IT delivery."
+  },
+  "work": [
+    {
+      "company": "Cross-border payment technology company",
+      "position": "Technical Support",
+      "summary": "Support merchant API and AI Skill integrations while maintaining observability for overseas financial channels.",
+      "highlights": [
+        "Built Datadog-based monitoring and custom log rules for full-link issue detection.",
+        "Supported SLA stability above 99.9%."
+      ]
+    },
+    {
+      "company": "Automotive enterprise",
+      "position": "ITBP / Finance Systems",
+      "summary": "Managed finance information-system delivery, operations, data governance, and automation opportunities for business teams.",
+      "highlights": [
+        "Coordinated requirements with IT teams and supported iterative system improvements.",
+        "Maintained SAP, BI, and reporting workflows for financial data synchronization."
+      ]
+    },
+    {
+      "company": "Enterprise software service provider",
+      "position": "DevOps / SCCM Technical Support",
+      "summary": "Handled global endpoint support, Microsoft ecosystem troubleshooting, and enterprise endpoint deployment operations.",
+      "highlights": [
+        "Maintained SOPs and knowledge-base articles for repeatable troubleshooting and compliance workflows.",
+        "Used SCCM, WSUS, and Intune for standardized imaging, software rollout, and update operations.",
+        "Improved endpoint update efficiency through conflict analysis and workflow optimization."
+      ]
+    }
+  ],
+  "education": [
+    {
+      "institution": "Anqing Normal University",
+      "area": "Computer Science and Technology",
+      "studyType": "Bachelor's degree"
+    }
+  ],
+  "skills": [
+    {
+      "name": "AI Systems",
+      "keywords": ["Prompt Engineering", "RAG", "AI Agents", "LangChain", "LangGraph", "Dify", "Milvus", "DeepSeek"]
+    },
+    {
+      "name": "Engineering",
+      "keywords": ["Python", "Java", "C/C++", "Data Structures", "Algorithms", "ANTLR", "DSL", "APIs"]
+    },
+    {
+      "name": "Operations",
+      "keywords": ["Linux", "Docker", "Kubernetes", "Git", "TCP/IP", "DNS", "Datadog", "SCCM", "Intune"]
+    }
+  ],
+  "projects": [
+    {
+      "name": "Enterprise Q&A Agent",
+      "summary": "A private enterprise knowledge assistant built with LangChain, LangGraph, Milvus, and DeepSeek, focused on document cleaning, chunking, retrieval optimization, and multi-turn task orchestration."
+    },
+    {
+      "name": "Music Generation Agent",
+      "summary": "An end-to-end music-generation agent that connects instruction understanding, task decomposition, model invocation, and audio fusion across multiple music models."
+    },
+    {
+      "name": "ANTLR-based Language Interpreter",
+      "summary": "A DSL interpreter project covering grammar design, lexer/parser files, AST structures, and separation between syntax analysis and backend logic."
+    }
+  ],
+  "certificates": [
+    "Prompt Engineer",
+    "Datawhale Community Contributor",
+    "Google Digital Marketing Certification"
+  ]
+}

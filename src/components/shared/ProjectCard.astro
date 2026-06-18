@@ -1,0 +1,76 @@
+---
+const { project } = Astro.props;
+const { data, id } = project;
+---
+
+<article class="project-card surface">
+  <div>
+    <h3><a href={`/projects/#${id}`}>{data.title}</a></h3>
+    <p>{data.description}</p>
+  </div>
+
+  {data.techStack?.length > 0 && (
+    <ul class="pill-list" aria-label={`Technology stack for ${data.title}`}>
+      {data.techStack.map((tech: string) => <li class="pill">{tech}</li>)}
+    </ul>
+  )}
+
+  <div class="links">
+    {data.link && <a href={data.link}>Live</a>}
+    {data.github && <a href={data.github}>Source</a>}
+  </div>
+</article>
+
+<style>
+  .project-card {
+    position: relative;
+    display: flex;
+    min-height: 100%;
+    overflow: hidden;
+    flex-direction: column;
+    justify-content: space-between;
+    gap: var(--space-6);
+    padding: var(--space-6);
+    transition: border-color 180ms ease, transform 180ms ease, box-shadow 180ms ease;
+  }
+
+  .project-card::before {
+    content: "";
+    position: absolute;
+    inset: -1px;
+    z-index: -1;
+    background: radial-gradient(circle at 20% 0%, rgba(101, 214, 173, 0.24), transparent 36%),
+      radial-gradient(circle at 85% 100%, rgba(70, 199, 222, 0.2), transparent 34%);
+    opacity: 0;
+    transition: opacity 180ms ease;
+  }
+
+  .project-card:hover {
+    border-color: rgba(8, 127, 140, 0.38);
+    box-shadow: 0 26px 64px rgba(16, 80, 96, 0.16);
+    transform: translateY(-5px);
+  }
+
+  .project-card:hover::before {
+    opacity: 1;
+  }
+
+  h3 {
+    margin-bottom: var(--space-3);
+  }
+
+  h3 a {
+    text-decoration: none;
+  }
+
+  p:last-child {
+    margin-bottom: 0;
+  }
+
+  .links {
+    display: flex;
+    gap: var(--space-4);
+    font-family: var(--font-mono);
+    font-size: 0.82rem;
+  }
+</style>

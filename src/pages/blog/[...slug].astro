@@ -1,0 +1,68 @@
+---
+import { getCollection, render } from 'astro:content';
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import Container from '../../components/ui/Container.astro';
+
+export async function getStaticPaths() {
+  const posts = (await getCollection('posts')).filter((post) => !post.data.draft);
+  return posts.map((post) => ({
+    params: { slug: post.id },
+    props: { post },
+  }));
+}
+
+const { post } = Astro.props;
+const { Content } = await render(post);
+---
+
+<BaseLayout title={post.data.title} description={post.data.description}>
+  <Container>
+    <article class="post">
+      <header class="post-header">
+        <a class="back-link" href="/blog/">← Notes</a>
+        <h1>{post.data.title}</h1>
+        <p>{post.data.description}</p>
+        {post.data.tags.length > 0 && (
+          <ul class="pill-list" aria-label="Post tags">
+            {post.data.tags.map((tag: string) => <li class="pill">{tag}</li>) }
+          </ul>
+        )}
+      </header>
+      <div class="prose post-content">
+        <Content />
+      </div>
+    </article>
+  </Container>
+</BaseLayout>
+
+<style>
+  .post {
+    padding: var(--space-16) 0;
+  }
+
+  .post-header {
+    max-width: var(--content);
+    margin-bottom: var(--space-12);
+  }
+
+  .back-link {
+    display: inline-block;
+    margin-bottom: var(--space-8);
+    font-family: var(--font-mono);
+    font-size: 0.82rem;
+    text-decoration: none;
+  }
+
+  .post-header h1 {
+    max-width: 12ch;
+    margin-bottom: var(--space-6);
+  }
+
+  .post-header > p:not(.kicker) {
+    font-size: clamp(1.05rem, 2vw, 1.25rem);
+  }
+
+  .post-content {
+    font-size: 1.05rem;
+  }
+</style>

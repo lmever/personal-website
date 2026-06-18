@@ -1,0 +1,293 @@
+---
+export interface FilmImage {
+  src: string;
+  alt: string;
+  caption?: string;
+}
+
+export interface Props {
+  images?: FilmImage[];
+  speed?: number; // 每秒移动像素数，默认 60
+  direction?: 'left' | 'right'; // 滚动方向，默认向左
+  imageHeight?: number; // 图片高度 px，默认 220
+}
+
+const {
+  images = [
+    { src: '/photos/1.png', alt: 'Memory 1' },
+    { src: '/photos/2.png', alt: 'Memory 2' },
+    { src: '/photos/3.png', alt: 'Memory 3' },
+    { src: '/photos/4.png', alt: 'Memory 4' },
+    { src: '/photos/5.png', alt: 'Memory 5' },
+    { src: '/photos/6.png', alt: 'Memory 6' },
+    { src: '/photos/7.png', alt: 'Memory 7' },
+    { src: '/photos/8.png', alt: 'Memory 8' },
+    { src: '/photos/9.png', alt: 'Memory 9' },
+  ],
+  speed = 60,
+  direction = 'left',
+  imageHeight = 220,
+} = Astro.props;
+
+// 复制图片数组两份以实现无缝循环效果
+const duplicatedImages = [...images, ...images, ...images];
+---
+
+<section class="filmstrip-section">
+  <div class="section-heading">
+    <h2 class="filmstrip-title">Keep an eye for beauty in life</h2>
+  </div>
+
+  <div class="filmstrip-container" data-speed={speed} data-direction={direction} data-image-height={imageHeight}>
+    <!-- 顶部胶卷齿孔 -->
+    <div class="film-perforations top-perforations" aria-hidden="true">
+      <div class="perforations-track"></div>
+      <div class="perforations-track"></div>
+    </div>
+
+    <!-- 图片滚动轨道 -->
+    <div class="filmstrip-track">
+      <div class="filmstrip-images">
+        {duplicatedImages.map((image, index) => (
+          <div class="film-frame" style={{ height: `${imageHeight}px` }}>
+            <img
+              src={image.src}
+              alt={image.alt}
+              class="film-image"
+              loading={index < 6 ? 'eager' : 'lazy'}
+            />
+            {image.caption && <span class="film-caption">{image.caption}</span>}
+          </div>
+        ))}
+      </div>
+    </div>
+
+    <!-- 底部胶卷齿孔 -->
+    <div class="film-perforations bottom-perforations" aria-hidden="true">
+      <div class="perforations-track"></div>
+      <div class="perforations-track"></div>
+    </div>
+  </div>
+</section>
+
+<script>
+  // 监听元素进入视口，触发滚动动画
+  const initFilmStrip = () => {
+    const container = document.querySelector('.filmstrip-container') as HTMLElement;
+    const track = document.querySelector('.filmstrip-images') as HTMLElement;
+    if (!container || !track) return;
+
+    const speed = parseInt(container.dataset.speed || '60');
+    const direction = container.dataset.direction || 'left';
+
+    let animationId: number | null = null;
+    let position = 0;
+    let isPlaying = false;
+    let isPaused = false;
+
+    // 计算单组图片的总宽度（用于无缝循环）
+    const getSetWidth = () => {
+      const frames = track.querySelectorAll('.film-frame') as NodeListOf<HTMLElement>;
+      const singleSetLength = Math.floor(frames.length / 3);
+      let width = 0;
+      for (let i = 0; i < singleSetLength; i++) {
+        width += frames[i].offsetWidth || 300;
+      }
+      return width;
+    };
+
+    let setWidth = getSetWidth();
+
+    // 滚动动画
+    const animate = () => {
+      if (!isPaused) {
+        const moveAmount = speed / 60; // 60fps
+        if (direction === 'left') {
+          position -= moveAmount;
+          // 无缝循环：当滚动超过一组图片宽度时重置位置
+          if (Math.abs(position) >= setWidth) {
+            position = 0;
+          }
+        } else {
+          position += moveAmount;
+          if (position >= setWidth) {
+            position = 0;
+          }
+        }
+        track.style.transform = `translateX(${position}px)`;
+      }
+      animationId = requestAnimationFrame(animate);
+    };
+
+    // Intersection Observer 监测进入视口
+    const observer = new IntersectionObserver((entries) => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting && !isPlaying) {
+          isPlaying = true;
+          setWidth = getSetWidth(); // 重新计算宽度确保准确
+          animate();
+        } else if (!entry.isIntersecting && isPlaying) {
+          isPlaying = false;
+          if (animationId) {
+            cancelAnimationFrame(animationId);
+            animationId = null;
+          }
+        }
+      });
+    }, { threshold: 0.2 });
+
+    observer.observe(container);
+
+    // 鼠标悬停时暂停
+    container.addEventListener('mouseenter', () => {
+      isPaused = true;
+    });
+
+    container.addEventListener('mouseleave', () => {
+      isPaused = false;
+    });
+
+    // 窗口大小变化时重新计算宽度
+    window.addEventListener('resize', () => {
+      setWidth = getSetWidth();
+    });
+  };
+
+  // 确保 DOM 加载完成后初始化
+  if (document.readyState === 'loading') {
+    document.addEventListener('DOMContentLoaded', initFilmStrip);
+  } else {
+    initFilmStrip();
+  }
+</script>
+
+<style>
+  .filmstrip-section {
+    padding: var(--space-16) 0;
+    overflow: hidden;
+  }
+
+  .section-heading {
+    text-align: center;
+    margin-bottom: var(--space-8);
+  }
+
+  .filmstrip-title {
+    margin-top: var(--space-2);
+    font-size: clamp(1.6rem, 3vw, 2.4rem);
+    font-family: 'Georgia', serif;
+    font-style: italic;
+  }
+
+  .filmstrip-container {
+    position: relative;
+    width: 100vw;
+    margin-left: calc(-50vw + 50%);
+    background: linear-gradient(180deg, #0d0d0d 0%, #1a1a1a 50%, #0d0d0d 100%);
+    box-shadow: 0 25px 80px rgba(0, 0, 0, 0.5), inset 0 2px 10px rgba(0, 0, 0, 0.8);
+  }
+
+  /* 胶卷齿孔样式 */
+  .film-perforations {
+    height: 28px;
+    background: #0a0a0a;
+    display: flex;
+    align-items: center;
+    overflow: hidden;
+    position: relative;
+  }
+
+  .perforations-track {
+    flex: 1;
+    height: 12px;
+    /* 使用径向渐变创建齿孔效果 */
+    background-image: radial-gradient(circle, #1a1a1a 4.5px, transparent 4.5px);
+    background-size: 22px 12px;
+    background-repeat: repeat-x;
+    background-position: 0 center;
+    will-change: background-position;
+  }
+
+  .top-perforations {
+    border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+  }
+
+  .bottom-perforations {
+    border-top: 1px solid rgba(255, 255, 255, 0.05);
+  }
+
+  /* 图片轨道 */
+  .filmstrip-track {
+    overflow: hidden;
+    padding: 8px 0;
+  }
+
+  .filmstrip-images {
+    display: flex;
+    gap: 8px; /* 图片间的极小间隙，模拟胶片帧 */
+    padding: 0 4px;
+    will-change: transform;
+    /* 初始位置偏移，让第一组图片完整显示 */
+    transform: translateX(0);
+  }
+
+  .film-frame {
+    flex-shrink: 0;
+    position: relative;
+    background: #0a0a0a;
+    border: 1px solid rgba(255, 255, 255, 0.08);
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.6);
+    overflow: hidden;
+  }
+
+  .film-image {
+    height: 100%;
+    width: auto;
+    object-fit: cover;
+    display: block;
+    /* 轻微复古色调 */
+    filter: sepia(0.08) contrast(1.05) saturate(0.95);
+  }
+
+  .film-caption {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    padding: 20px 12px 8px;
+    background: linear-gradient(transparent, rgba(0, 0, 0, 0.8));
+    color: rgba(255, 255, 255, 0.9);
+    font-size: 0.85rem;
+    font-family: 'Georgia', serif;
+    font-style: italic;
+    opacity: 0;
+    transition: opacity 0.3s ease;
+  }
+
+  .film-frame:hover .film-caption {
+    opacity: 1;
+  }
+
+  /* 响应式调整 */
+  @media (max-width: 768px) {
+    .film-perforations {
+      height: 20px;
+    }
+
+    .perforations-track {
+      height: 8px;
+      background-image: radial-gradient(circle, #1a1a1a 3px, transparent 3px);
+      background-size: 16px 8px;
+    }
+
+    .film-frame {
+      height: 150px !important; /* 覆盖内联样式 */
+    }
+  }
+
+  @media (max-width: 480px) {
+    .film-frame {
+      height: 120px !important;
+    }
+  }
+</style>

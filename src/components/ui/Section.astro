@@ -1,0 +1,28 @@
+---
+const { kicker, title, class: className = '' } = Astro.props;
+---
+
+<section class:list={['section', className]}>
+  {(kicker || title) && (
+    <div class="section-heading">
+      {kicker && <p class="kicker">{kicker}</p>}
+      {title && <h2>{title}</h2>}
+    </div>
+  )}
+  <slot />
+</section>
+
+<style>
+  .section {
+    padding-block: var(--space-16);
+  }
+
+  .section-heading {
+    max-width: 760px;
+    margin-bottom: var(--space-8);
+  }
+
+  h2 {
+    margin-bottom: 0;
+  }
+</style>
