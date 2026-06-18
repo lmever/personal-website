@@ -3,5 +3,8 @@
   "compilerOptions": {
     "allowJs": true,
     "resolveJsonModule": true
-  }
+  },
+  "include": [
+    "./worker-configuration.d.ts"
+  ]
 }
