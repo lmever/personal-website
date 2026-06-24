@@ -7,6 +7,7 @@ import '../styles/global.css';
 const {
   title = site.title,
   description = site.description,
+  spaceTop = false,
 } = Astro.props;
 const pageTitle = title === site.title ? title : `${title} · ${site.name}`;
 ---
@@ -24,8 +25,8 @@ const pageTitle = title === site.title ? title : `${title} · ${site.name}`;
     <link rel="icon" href="/favicon.svg" />
     <title>{pageTitle}</title>
   </head>
-  <body>
-    <div class="starfield" aria-hidden="true">
+  <body class:list={[spaceTop && "has-space-top"]}>
+    <div class:list={["starfield", spaceTop && "starfield--space"]} aria-hidden="true">
       <canvas id="webgl-starfield" class="webgl-starfield"></canvas>
       <span class="nebula nebula-a"></span>
       <span class="nebula nebula-b"></span>

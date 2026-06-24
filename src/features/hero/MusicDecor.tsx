@@ -41,7 +41,7 @@ export default function MusicDecor({ position = 'bottom-right' }: MusicDecorProp
   }, []);
 
   const positionStyles: Record<string, string> = {
-    'top-left': 'top: 0; left: 0;',
+    'top-left': 'top: 5.5rem; left: calc((100% - 100vw) / 2 + 0.5rem);',
     'top-right': 'top: 0; right: 0;',
     'bottom-left': 'bottom: 0; left: 0;',
     'bottom-right': 'bottom: 0; right: 0;',
@@ -68,19 +68,19 @@ export default function MusicDecor({ position = 'bottom-right' }: MusicDecorProp
         }
 
         .music-decor-container {
-          position: fixed;
-          width: 150px;
-          height: 150px;
-          overflow: hidden;
-          z-index: 0;
+          position: absolute;
+          width: 200px;
+          height: 200px;
+          overflow: visible;
+          z-index: 1;
           pointer-events: none;
           ${positionStyles[position]}
         }
 
         @media (max-width: 768px) {
           .music-decor-container {
-            width: 100px;
-            height: 100px;
+            width: 120px;
+            height: 120px;
             opacity: 0.6;
           }
         }

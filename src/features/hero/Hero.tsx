@@ -18,9 +18,9 @@ interface IdentityTag {
 
 // Configuration - Planet-like orbits (top-down view)
 const ORBITING_LOGOS: OrbitingLogo[] = [
-  { id: 1, name: 'chrome', radius: 110, speed: 0.3, delay: 0, orbitY: 0, size: 42 },
-  { id: 2, name: 'edge', radius: 140, speed: 0.22, delay: 2, orbitY: 0, size: 40 },
-  { id: 3, name: 'chery', radius: 170, speed: 0.15, delay: 4, orbitY: 0, size: 44 },
+  { id: 1, name: 'chrome', radius: 110, speed: 0.15, delay: 0, orbitY: 0, size: 42 },
+  { id: 2, name: 'edge', radius: 160, speed: 0.11, delay: 2, orbitY: 0, size: 40 },
+  { id: 3, name: 'chery', radius: 210, speed: 0.075, delay: 4, orbitY: 0, size: 44 },
 ];
 
 const IDENTITY_TAGS: IdentityTag[] = [
@@ -32,11 +32,8 @@ const IDENTITY_TAGS: IdentityTag[] = [
   { label: 'Trader', href: '#code' },
 ];
 
-// 钢琴配色主题 - Piano Inspired Colors
-const PRIMARY_BLUE = '#3b82f6';
-const SECONDARY_GREEN = '#10b981';
-const GOLD_ACCENT = '#c9a962';
-const DARK_TEXT = '#1a1a1a';
+// 暖色星空主题 - Warm Deep-Space Colors
+const GOLD_ACCENT = '#5fcf9f';
 
 export default function Hero() {
   const cardRef = useRef<HTMLDivElement>(null);
@@ -186,6 +183,10 @@ export default function Hero() {
 
             {/* Avatar container - Solar system style */}
             <div className="avatar-wrapper">
+              {/* Aurora ring - flowing light curtains around the avatar */}
+              <div className="aurora-ring aurora-ring-1" aria-hidden="true" />
+              <div className="aurora-ring aurora-ring-2" aria-hidden="true" />
+
               {/* Sound wave rings - Music visualizer effect */}
               <div className="sound-wave-ring" aria-hidden="true" />
               <div className="sound-wave-ring" aria-hidden="true" />
@@ -336,13 +337,12 @@ export default function Hero() {
           width: 420px;
           height: 420px;
           border-radius: 24px;
-          /* 纯白卡片 - 钢琴琴键白质感 */
-          background: linear-gradient(145deg, #ffffff, #f8f9fa);
-          border: 1px solid rgba(0, 0, 0, 0.08);
+          /* 纯轮廓卡片 - 零磨砂，仅描边，头像完全浮于星空极光之上 */
+          background: transparent;
+          border: 1px solid rgba(150, 215, 255, 0.28);
           box-shadow:
-            0 25px 50px -12px rgba(0, 0, 0, 0.1),
-            inset 1px 1px 0 rgba(255, 255, 255, 0.9),
-            inset -1px -1px 0 rgba(201, 169, 98, 0.1);
+            inset 1px 1px 0 rgba(200, 230, 255, 0.16),
+            inset -1px -1px 0 rgba(95, 207, 159, 0.12);
           display: flex;
           align-items: center;
           justify-content: center;
@@ -355,8 +355,8 @@ export default function Hero() {
           width: 200px;
           height: 200px;
           border-radius: 50%;
-          /* 蓝绿双色光晕 - Piano inspired */
-          background: radial-gradient(circle, ${PRIMARY_BLUE}30 0%, ${SECONDARY_GREEN}20 50%, transparent 70%);
+          /* 极光绿青光晕 */
+          background: radial-gradient(circle, rgba(70, 210, 140, 0.35) 0%, rgba(60, 185, 175, 0.2) 50%, transparent 70%);
           animation: pulse-glow 3s ease-in-out infinite;
         }
 
@@ -374,7 +374,28 @@ export default function Hero() {
           z-index: 10;
         }
 
-        /* Orbit path visual guides - subtle rings (light theme) */
+        /* 头像柔光 halo - 锚定视觉，与极光呼应 */
+        .avatar-main::before {
+          content: '';
+          position: absolute;
+          left: 50%;
+          top: 50%;
+          width: 260px;
+          height: 260px;
+          transform: translate(-50%, -50%);
+          border-radius: 50%;
+          background: radial-gradient(circle,
+            rgba(110, 224, 176, 0.35) 0%,
+            rgba(77, 184, 212, 0.22) 38%,
+            rgba(60, 120, 200, 0.1) 60%,
+            transparent 75%);
+          filter: blur(18px);
+          z-index: -1;
+          pointer-events: none;
+          animation: pulse-glow 4s ease-in-out infinite;
+        }
+
+        /* Orbit path visual guides - subtle rings (warm theme) */
         .avatar-wrapper::before,
         .avatar-wrapper::after,
         .orbit-guide-3 {
@@ -382,7 +403,7 @@ export default function Hero() {
           position: absolute;
           left: 50%;
           top: 50%;
-          border: 1px dashed rgba(59, 130, 246, 0.15);
+          border: 1px dashed rgba(150, 215, 255, 0.2);
           border-radius: 50%;
           transform: translate(-50%, -50%);
           pointer-events: none;
@@ -394,13 +415,13 @@ export default function Hero() {
         }
 
         .avatar-wrapper::after {
-          width: 280px;
-          height: 280px;
+          width: 320px;
+          height: 320px;
         }
 
         .orbit-guide-3 {
-          width: 340px;
-          height: 340px;
+          width: 420px;
+          height: 420px;
           position: absolute;
           z-index: 0;
         }
@@ -409,15 +430,15 @@ export default function Hero() {
           width: 120px;
           height: 120px;
           border-radius: 50%;
-          /* 钢琴蓝绿渐变边框 */
-          background: linear-gradient(135deg, ${PRIMARY_BLUE}, ${SECONDARY_GREEN});
+          /* 暖金渐变边框 - 烛火/落日 */
+          background: linear-gradient(135deg, ${GOLD_ACCENT}, #4db8d4);
           display: flex;
           align-items: center;
           justify-content: center;
           box-shadow:
-            0 0 30px ${PRIMARY_BLUE}40,
-            0 0 60px ${SECONDARY_GREEN}30,
-            inset 0 2px 10px rgba(255, 255, 255, 0.5);
+            0 0 30px rgba(70, 210, 140, 0.45),
+            0 0 60px rgba(60, 185, 175, 0.3),
+            inset 0 2px 10px rgba(200, 230, 255, 0.5);
           overflow: hidden;
           padding: 3px;
         }
@@ -478,8 +499,8 @@ export default function Hero() {
         }
 
         .eyebrow-text {
-          /* 金色引导文字 */
-          color: ${GOLD_ACCENT};
+          /* 暖金引导文字 */
+          color: #6fe0b0;
           font-family: var(--font-mono, 'SF Mono', monospace);
           font-size: 0.875rem;
           font-weight: 600;
@@ -497,8 +518,8 @@ export default function Hero() {
           font-size: clamp(3.5rem, 10vw, 6rem);
           font-weight: 800;
           letter-spacing: -0.02em;
-          /* 钢琴渐变文字 - 黑 -> 蓝 -> 绿 */
-          background: linear-gradient(135deg, ${DARK_TEXT} 0%, ${PRIMARY_BLUE} 50%, ${SECONDARY_GREEN} 100%);
+          /* 暖色渐变文字 - 暖白 → 金 → 暖橙 */
+          background: linear-gradient(135deg, #eaf6ff 0%, #6fe0b0 50%, #4db8d4 100%);
           -webkit-background-clip: text;
           -webkit-text-fill-color: transparent;
           background-clip: text;
@@ -507,8 +528,8 @@ export default function Hero() {
         .hero-description {
           font-size: 1.125rem;
           line-height: 1.7;
-          /* 深灰正文 */
-          color: var(--color-text-body, #4b5563);
+          /* 暖色柔光正文 */
+          color: rgba(224, 240, 255, 0.82);
           margin: 0;
         }
 
@@ -523,22 +544,22 @@ export default function Hero() {
         .identity-tag {
           padding: 0.5rem 1rem;
           border-radius: 9999px;
-          /* 浅灰背景标签 */
-          background: var(--color-section-bg, #f0f2f5);
-          border: 1px solid var(--color-border, rgba(229, 231, 235, 0.8));
-          color: var(--color-text-body, #4b5563);
+          /* 半透明暖色玻璃标签 */
+          background: rgba(200, 230, 255, 0.08);
+          border: 1px solid rgba(150, 215, 255, 0.2);
+          color: rgba(224, 240, 255, 0.85);
           font-size: 0.875rem;
           text-decoration: none;
           transition: all 0.2s ease;
         }
 
         .identity-tag:hover {
-          /* 悬停时蓝色背景 */
-          background: rgba(59, 130, 246, 0.1);
-          border-color: ${PRIMARY_BLUE}40;
-          color: ${PRIMARY_BLUE};
+          /* 悬停时暖金高亮 */
+          background: rgba(70, 210, 140, 0.18);
+          border-color: rgba(240, 193, 120, 0.5);
+          color: #eaf6ff;
           transform: translateY(-2px);
-          box-shadow: 0 4px 12px rgba(59, 130, 246, 0.15);
+          box-shadow: 0 4px 12px rgba(70, 210, 140, 0.25);
         }
 
         .hero-actions {
@@ -558,32 +579,34 @@ export default function Hero() {
         }
 
         .btn-primary {
-          /* 蓝色主按钮 */
-          background: linear-gradient(135deg, ${PRIMARY_BLUE}, ${SECONDARY_GREEN});
-          color: #ffffff;
-          box-shadow: 0 4px 15px rgba(59, 130, 246, 0.3);
+          /* 暖金主按钮 - 落日渐变 */
+          background: linear-gradient(135deg, #4db8d4, #3a9e7e);
+          color: #0a1b22;
+          box-shadow: 0 4px 15px rgba(70, 210, 140, 0.35);
         }
 
         .btn-primary:hover {
           transform: translateY(-2px);
           box-shadow:
-            0 8px 25px rgba(59, 130, 246, 0.4),
-            0 4px 10px rgba(16, 185, 129, 0.2);
+            0 8px 25px rgba(70, 210, 140, 0.45),
+            0 4px 10px rgba(60, 185, 175, 0.25);
         }
 
         .btn-secondary {
-          /* 浅灰次要按钮 */
-          background: var(--color-surface, #ffffff);
-          border: 1px solid var(--color-border, rgba(229, 231, 235, 0.8));
-          color: var(--color-text-body, #4b5563);
+          /* 半透明暖色玻璃次按钮 */
+          background: rgba(200, 230, 255, 0.08);
+          border: 1px solid rgba(150, 215, 255, 0.25);
+          color: rgba(224, 240, 255, 0.9);
+          backdrop-filter: blur(6px);
+          -webkit-backdrop-filter: blur(6px);
         }
 
         .btn-secondary:hover {
-          background: var(--color-bg-soft, #fafafa);
-          border-color: ${PRIMARY_BLUE}40;
-          color: ${PRIMARY_BLUE};
+          background: rgba(70, 210, 140, 0.15);
+          border-color: rgba(240, 193, 120, 0.5);
+          color: #eaf6ff;
           transform: translateY(-2px);
-          box-shadow: 0 4px 12px rgba(59, 130, 246, 0.1);
+          box-shadow: 0 4px 12px rgba(70, 210, 140, 0.2);
         }
 
         @keyframes pulse-glow {
@@ -602,13 +625,85 @@ export default function Hero() {
           }
         }
 
+        /* ===== Aurora ring around the avatar ===== */
+        .aurora-ring {
+          position: absolute;
+          left: 50%;
+          top: 50%;
+          width: 320px;
+          height: 320px;
+          border-radius: 50%;
+          transform: translate(-50%, -50%);
+          pointer-events: none;
+          z-index: 1;
+          /* keep the glow as a thin ring: large transparent core, narrow colored rim */
+          -webkit-mask: radial-gradient(closest-side, transparent 66%, #000 74%, #000 84%, transparent 96%);
+          mask: radial-gradient(closest-side, transparent 66%, #000 74%, #000 84%, transparent 96%);
+          mix-blend-mode: screen;
+          filter: blur(11px) saturate(1.3);
+          will-change: transform, opacity;
+        }
+
+        .aurora-ring-1 {
+          background: conic-gradient(
+            from 0deg,
+            rgba(60, 220, 130, 0.0) 0deg,
+            rgba(80, 240, 150, 0.85) 50deg,
+            rgba(110, 250, 180, 0.7) 110deg,
+            rgba(60, 210, 160, 0.75) 175deg,
+            rgba(120, 200, 230, 0.5) 240deg,
+            rgba(160, 130, 220, 0.45) 305deg,
+            rgba(60, 220, 130, 0.0) 360deg
+          );
+          animation: aurora-spin 30s linear infinite,
+            aurora-breathe 7s ease-in-out infinite alternate;
+        }
+
+        .aurora-ring-2 {
+          width: 280px;
+          height: 280px;
+          background: conic-gradient(
+            from 180deg,
+            rgba(120, 255, 180, 0.0) 0deg,
+            rgba(70, 230, 140, 0.7) 60deg,
+            rgba(140, 250, 190, 0.6) 140deg,
+            rgba(90, 200, 210, 0.55) 220deg,
+            rgba(110, 240, 160, 0.8) 300deg,
+            rgba(120, 255, 180, 0.0) 360deg
+          );
+          opacity: 0.85;
+          animation: aurora-spin-rev 40s linear infinite,
+            aurora-breathe 9s ease-in-out infinite alternate-reverse;
+        }
+
+        @keyframes aurora-spin {
+          from { transform: translate(-50%, -50%) rotate(0deg); }
+          to { transform: translate(-50%, -50%) rotate(360deg); }
+        }
+
+        @keyframes aurora-spin-rev {
+          from { transform: translate(-50%, -50%) rotate(360deg); }
+          to { transform: translate(-50%, -50%) rotate(0deg); }
+        }
+
+        @keyframes aurora-breathe {
+          0% { filter: blur(14px) saturate(1.3); opacity: 0.7; }
+          100% { filter: blur(20px) saturate(1.6); opacity: 1; }
+        }
+
+        @media (prefers-reduced-motion: reduce) {
+          .aurora-ring {
+            animation: none;
+          }
+        }
+
         /* Sound wave rings - start from orbit guide positions (light theme) */
         .sound-wave-ring {
           position: absolute;
           left: 50%;
           top: 50%;
-          /* 蓝色声波环 */
-          border: 1px solid rgba(59, 130, 246, 0.3);
+          /* 暖金声波环 */
+          border: 1px solid rgba(70, 210, 140, 0.35);
           border-radius: 50%;
           transform: translate(-50%, -50%);
           pointer-events: none;
@@ -623,17 +718,17 @@ export default function Hero() {
           animation-delay: 0s;
         }
 
-        /* Second ring starts at middle orbit (280px) */
+        /* Second ring starts at middle orbit (320px) */
         .sound-wave-ring:nth-child(2) {
-          width: 280px;
-          height: 280px;
+          width: 320px;
+          height: 320px;
           animation-delay: 1.33s;
         }
 
-        /* Third ring starts at outermost orbit (340px) */
+        /* Third ring starts at outermost orbit (420px) */
         .sound-wave-ring:nth-child(3) {
-          width: 340px;
-          height: 340px;
+          width: 420px;
+          height: 420px;
           animation-delay: 2.66s;
         }
 
@@ -685,12 +780,25 @@ export default function Hero() {
             height: 360px;
           }
 
+          /* 等比缩小整组轨道，使最外圈(420px)收进 360px 卡片 */
+          .avatar-wrapper {
+            transform: scale(0.72);
+          }
+
           .hero-actions {
             flex-direction: column;
           }
 
           .btn {
             text-align: center;
+          }
+        }
+
+        /* Tablet range: card is 420px while outer orbit is also 420px,
+           scale down slightly so logos don't sit on the card edge */
+        @media (min-width: 641px) and (max-width: 959px) {
+          .avatar-wrapper {
+            transform: scale(0.9);
           }
         }
       `}</style>

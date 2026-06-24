@@ -277,6 +277,110 @@ section[id] {
   mix-blend-mode: multiply;
 }
 
+/* ============================================
+   Warm deep-space band — homepage Hero only.
+   Turns the shared starfield into a tall warm
+   night-sky band at the top that fades to
+   transparent, revealing the bright body below.
+   ============================================ */
+
+/* The body paints an opaque light background; since the
+   starfield sits at a negative z-index it would be hidden
+   beneath it. On the homepage, make the body transparent so
+   the dark band shows through. The lower content area is then
+   backed by the light html background, giving the dark→bright
+   gradient transition. */
+body.has-space-top {
+  background: transparent;
+}
+
+/* The body's white top-sheen + grid overlays (z-index -1) sit
+   above the starfield (-5) and would wash out the dark band.
+   Disable them on the homepage. */
+body.has-space-top::before,
+body.has-space-top::after {
+  display: none;
+}
+
+.starfield--space {
+  /* Band anchored to top of document, scrolls with page */
+  position: absolute;
+  inset: 0 0 auto 0;
+  height: 130vh;
+  /* 吞噬星空式深邃宇宙：幽蓝紫虚空 + 紫品红/青色星云团块 */
+  background:
+    radial-gradient(ellipse at 22% 18%, rgba(150, 70, 200, 0.28), transparent 42%),
+    radial-gradient(ellipse at 80% 26%, rgba(40, 150, 200, 0.24), transparent 46%),
+    radial-gradient(ellipse at 52% 8%, rgba(90, 110, 230, 0.22), transparent 40%),
+    radial-gradient(ellipse at 64% 50%, rgba(120, 50, 170, 0.16), transparent 50%),
+    linear-gradient(180deg, #060818 0%, #0a1030 24%, #12184a 48%, rgba(30, 50, 110, 0.5) 76%, transparent 100%);
+}
+
+/* Fade the band's lower edge into the page so the
+   transition to the bright content area is seamless */
+.starfield--space::before {
+  /* 星云细节：紫品红与青色光团，增强能量感 */
+  background:
+    radial-gradient(ellipse at 28% 24%, rgba(190, 100, 240, 0.18), transparent 28%),
+    radial-gradient(ellipse at 72% 40%, rgba(60, 180, 230, 0.14), transparent 34%),
+    radial-gradient(ellipse at 48% 60%, rgba(120, 90, 220, 0.12), transparent 38%);
+  filter: blur(34px) saturate(1.35);
+  opacity: 0.95;
+  animation: sky-photo-pan 64s ease-in-out infinite alternate;
+}
+
+.starfield--space::after {
+  /* 斜向星云光带 - 紫青能量流 */
+  background: linear-gradient(110deg, transparent 12%, rgba(180, 130, 255, 0.2) 32%, rgba(80, 190, 235, 0.1) 50%, transparent 74%);
+  filter: blur(12px);
+  opacity: 0.75;
+  transform: rotate(-4deg);
+  animation: dust-lane-flow 52s ease-in-out infinite alternate;
+}
+
+/* Canvas must be fully visible against the dark band */
+.starfield--space .webgl-starfield {
+  opacity: 1;
+  mix-blend-mode: normal;
+}
+
+/* Hide the cool blue/green CSS sky layers in the warm band
+   (the WebGL warm stars replace them) */
+.starfield--space .nebula,
+.starfield--space .milky-way,
+.starfield--space .star-layer {
+  display: none;
+}
+
+/* Cool blue-white shooting stars for the space band */
+.starfield--space .shooting-star {
+  background: linear-gradient(90deg, transparent, rgba(200, 225, 255, 0.6), rgba(120, 180, 255, 0.3), transparent);
+}
+
+/* ============================================
+   Header adapts to the dark band on the homepage
+   only. Other pages keep the default light header.
+   ============================================ */
+.has-space-top .site-header {
+  background: linear-gradient(to bottom, rgba(10, 20, 48, 0.55), rgba(10, 20, 48, 0));
+  border-bottom-color: rgba(160, 200, 255, 0.12);
+  color: rgba(224, 236, 255, 0.92);
+}
+
+.has-space-top .site-header .nav-brand,
+.has-space-top .site-header .nav-link,
+.has-space-top .site-header .social-link,
+.has-space-top .site-header .mobile-toggle {
+  color: rgba(224, 236, 255, 0.88);
+}
+
+.has-space-top .site-header .nav-brand:hover,
+.has-space-top .site-header .nav-link:hover,
+.has-space-top .site-header .social-link:hover,
+.has-space-top .site-header .mobile-toggle:hover {
+  color: #8ec5ff;
+}
+
 .star-layer,
 .nebula,
 .milky-way,

@@ -24,10 +24,7 @@ const inspirationPreview = [
 ];
 ---
 
-<BaseLayout title={site.title} description={site.description}>
-  <MusicDecor client:load position="top-left" />
-  <MusicDecor client:load position="bottom-right" />
-
+<BaseLayout title={site.title} description={site.description} spaceTop={true}>
   <Container class="home-shell">
     <Hero client:load />
 
@@ -35,7 +32,9 @@ const inspirationPreview = [
 
     <DatawhaleStory />
 
-    <section class="section-block">
+    <section class="section-block music-block">
+      <MusicDecor client:load position="top-left" />
+      <MusicDecor client:load position="bottom-right" />
       <Music />
     </section>
 
@@ -132,7 +131,25 @@ const inspirationPreview = [
     const camera = new THREE.PerspectiveCamera(62, window.innerWidth / window.innerHeight, 0.1, 1200);
     camera.position.z = 150;
 
-    const starCount = 5000;
+    // Soft round glowing sprite so stars read as points of light, not squares
+    const makeStarTexture = () => {
+      const size = 64;
+      const c = document.createElement('canvas');
+      c.width = c.height = size;
+      const ctx = c.getContext('2d')!;
+      const g = ctx.createRadialGradient(size / 2, size / 2, 0, size / 2, size / 2, size / 2);
+      g.addColorStop(0, 'rgba(255, 255, 255, 1)');
+      g.addColorStop(0.25, 'rgba(220, 235, 255, 0.95)');
+      g.addColorStop(0.55, 'rgba(150, 195, 255, 0.35)');
+      g.addColorStop(1, 'rgba(110, 165, 255, 0)');
+      ctx.fillStyle = g;
+      ctx.fillRect(0, 0, size, size);
+      const tex = new THREE.CanvasTexture(c);
+      return tex;
+    };
+    const starTexture = makeStarTexture();
+
+    const starCount = 6500;
     const positions = new Float32Array(starCount * 3);
     const colors = new Float32Array(starCount * 3);
     const color = new THREE.Color();
@@ -147,7 +164,19 @@ const inspirationPreview = [
       positions[i3 + 1] = radius * Math.sin(phi) * Math.sin(theta);
       positions[i3 + 2] = radius * Math.cos(phi) - 190;
 
-      color.setHSL(0.56 + Math.random() * 0.18, 0.42 + Math.random() * 0.3, 0.7 + Math.random() * 0.26);
+      // 吞噬星空式星点：以蓝白为主，少量紫色亮星
+      const roll = Math.random();
+      let hue: number;
+      let sat: number;
+      if (roll > 0.86) {
+        hue = 0.74 + Math.random() * 0.05;       // 紫色亮星
+        sat = 0.5 + Math.random() * 0.35;
+      } else {
+        hue = 0.58 + Math.random() * 0.08;       // 钴蓝~天蓝
+        sat = 0.35 + Math.random() * 0.4;
+      }
+      const light = 0.74 + Math.random() * 0.24;  // 偏白的明亮星点
+      color.setHSL(hue, sat, light);
       colors[i3] = color.r;
       colors[i3 + 1] = color.g;
       colors[i3 + 2] = color.b;
@@ -158,11 +187,12 @@ const inspirationPreview = [
     geometry.setAttribute('color', new THREE.BufferAttribute(colors, 3));
 
     const material = new THREE.PointsMaterial({
-      size: 1.18,
+      size: 3.6,
+      map: starTexture,
       sizeAttenuation: true,
       vertexColors: true,
       transparent: true,
-      opacity: 0.86,
+      opacity: 0.95,
       depthWrite: false,
       blending: THREE.AdditiveBlending,
     });
@@ -183,10 +213,13 @@ const inspirationPreview = [
     const animate = () => {
       frame = requestAnimationFrame(animate);
       if (!reducedMotion) {
-        stars.rotation.y += 0.00042;
-        stars.rotation.x += 0.0001;
-        camera.position.x = Math.sin(performance.now() * 0.00008) * 8;
-        camera.position.y = Math.cos(performance.now() * 0.00007) * 5;
+        const t = performance.now();
+        stars.rotation.y += 0.00038;
+        stars.rotation.x += 0.00009;
+        // gentle global twinkle by breathing material opacity
+        material.opacity = 0.82 + Math.sin(t * 0.0012) * 0.13;
+        camera.position.x = Math.sin(t * 0.00008) * 8;
+        camera.position.y = Math.cos(t * 0.00007) * 5;
         camera.lookAt(0, 0, -120);
       }
       renderer.render(scene, camera);
@@ -199,6 +232,7 @@ const inspirationPreview = [
       window.removeEventListener('resize', resize);
       geometry.dispose();
       material.dispose();
+      starTexture.dispose();
       renderer.dispose();
     }, { once: true });
   };
@@ -249,6 +283,10 @@ const inspirationPreview = [
 
   .section-block {
     padding: var(--space-16) 0;
+  }
+
+  .music-block {
+    position: relative;
   }
 
   .split-heading {

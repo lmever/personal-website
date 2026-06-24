@@ -2,7 +2,7 @@
 node_modules/
 
 # build output
-dist/
+# dist/  # 注释掉，Gitee Pages 需要 dist 目录
 .astro/
 
 # environment
