@@ -1,6 +1,7 @@
 ---
 import Header from '../components/layout/Header.astro';
 import Footer from '../components/layout/Footer.astro';
+import InkMountain from '../features/ink-mountain/InkMountain.astro';
 import site from '../data/site.json';
 import '../styles/global.css';
 
@@ -45,6 +46,7 @@ const pageTitle = title === site.title ? title : `${title} · ${site.name}`;
       <span class="ambient-orb ambient-orb-c"></span>
       <span class="ambient-grid"></span>
     </div>
+    <InkMountain />
     <Header />
     <main>
       <slot />

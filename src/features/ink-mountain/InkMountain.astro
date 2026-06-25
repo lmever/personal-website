@@ -1,0 +1,118 @@
+---
+// 分层水墨山水背景 - 东方美学式水印
+// 两层远山 + 一层雾气，滚动时做视差移动
+// blend-mode 让墨色"渗"入纸面，极淡不干扰阅读
+---
+
+<div class="ink-mountain" aria-hidden="true">
+  <div class="ink-layer ink-far"></div>
+  <div class="ink-layer ink-mid"></div>
+  <div class="ink-layer ink-mist"></div>
+</div>
+
+<script>
+  // 视差滚动 - 远山慢，近山快
+  const far = document.querySelector('.ink-far') as HTMLElement;
+  const mid = document.querySelector('.ink-mid') as HTMLElement;
+  const mist = document.querySelector('.ink-mist') as HTMLElement;
+
+  const updateParallax = () => {
+    const y = window.scrollY;
+    if (far) far.style.transform = `translateY(${y * 0.06}px)`;
+    if (mid) mid.style.transform = `translateY(${y * 0.15}px)`;
+    if (mist) mist.style.transform = `translateY(${y * 0.03}px)`;
+  };
+
+  window.addEventListener('scroll', updateParallax, { passive: true });
+  updateParallax();
+
+  // 首屏加载后淡入，避免突兀
+  requestAnimationFrame(() => {
+    document.querySelector('.ink-mountain')?.classList.add('is-ready');
+  });
+</script>
+
+<style>
+  .ink-mountain {
+    position: fixed;
+    inset: 0;
+    pointer-events: none;
+    z-index: -1;
+    opacity: 0;
+    transition: opacity 2s ease-out;
+  }
+
+  .ink-mountain.is-ready {
+    opacity: 1;
+  }
+
+  .ink-layer {
+    position: absolute;
+    left: -8%;
+    right: -8%;
+    bottom: -2%;
+    background-repeat: no-repeat;
+    will-change: transform;
+  }
+
+  /* 最远层 - 最淡，最大幅，移动最慢
+     底部固定，视差只让山顶上下移动，永远不会滚出屏幕 */
+  .ink-far {
+    height: 130vh;
+    bottom: 0;
+    /* Unsplash 水墨远山 - 极淡的山峰轮廓 */
+    background-image: url('https://images.unsplash.com/photo-1519681393784-d120267933ba?auto=format&fit=crop&w=2800&q=70');
+    background-size: cover;
+    background-position: bottom center;
+    mix-blend-mode: soft-light;
+    opacity: 0.14;
+    filter: grayscale(1) contrast(1.2) brightness(1.15);
+    /* 顶部柔化 - 与星空的深蓝无缝衔接 */
+    mask-image: linear-gradient(180deg, transparent 0%, black 35%, black 100%);
+    -webkit-mask-image: linear-gradient(180deg, transparent 0%, black 35%, black 100%);
+  }
+
+  /* 中层 - 稍浓，中等速度 */
+  .ink-mid {
+    height: 100vh;
+    bottom: 0;
+    /* Unsplash 近山轮廓 - 墨色稍重 */
+    background-image: url('https://images.unsplash.com/photo-1519681393784-d120267933ba?auto=format&fit=crop&w=2000&q=60');
+    background-size: cover;
+    background-position: bottom center;
+    mix-blend-mode: soft-light;
+    opacity: 0.11;
+    filter: grayscale(1) contrast(1.3) brightness(1.1);
+    mask-image: linear-gradient(180deg, transparent 0%, black 40%, black 100%);
+    -webkit-mask-image: linear-gradient(180deg, transparent 0%, black 40%, black 100%);
+  }
+
+  /* 雾气层 - 底部柔化过渡，最淡最慢 */
+  .ink-mist {
+    height: 80vh;
+    bottom: 0;
+    background: linear-gradient(
+      180deg,
+      transparent 0%,
+      rgba(180, 175, 165, 0.05) 50%,
+      rgba(160, 155, 145, 0.1) 100%
+    );
+    mix-blend-mode: soft-light;
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .ink-layer {
+      will-change: auto;
+    }
+  }
+
+  /* 移动端降低层数，保证性能和清晰度 */
+  @media (max-width: 768px) {
+    .ink-mid {
+      opacity: 0.07;
+    }
+    .ink-mist {
+      opacity: 0.7;
+    }
+  }
+</style>
