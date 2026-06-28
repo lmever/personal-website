@@ -301,14 +301,17 @@ export default function Hero() {
         </div>
       </div>
 
+      {/* Scroll Indicator - 极细滚动指示器位于底部 40% 留白区域 */}
+      <div className="scroll-indicator" aria-hidden="true" />
+
       <style>{`
         .hero-section {
           min-height: 100vh;
           display: flex;
-          align-items: center;
-          /* Account for fixed header height */
-          padding-top: 8rem;
-          padding-bottom: 4rem;
+          flex-direction: column;
+          /* 天宽地窄布局 - 顶部留白 20% 视口高度，内容占据 60% */
+          padding-top: 20vh;
+          padding-bottom: 8rem;
           position: relative;
         }
 
@@ -499,12 +502,12 @@ export default function Hero() {
         }
 
         .eyebrow-text {
-          /* 暖金引导文字 */
+          /* 暖金引导文字 - 细字重形成对比张力 */
           color: #6fe0b0;
-          font-family: var(--font-mono, 'SF Mono', monospace);
+          font-family: var(--font-serif);
           font-size: 0.875rem;
-          font-weight: 600;
-          letter-spacing: 0.15em;
+          font-weight: 200;
+          letter-spacing: 0.25em;
           text-transform: uppercase;
           margin: 0;
         }
@@ -515,8 +518,9 @@ export default function Hero() {
         }
 
         .name-english {
+          font-family: var(--font-serif);
           font-size: clamp(3.5rem, 10vw, 6rem);
-          font-weight: 800;
+          font-weight: 900;
           letter-spacing: -0.02em;
           /* 暖色渐变文字 - 暖白 → 金 → 暖橙 */
           background: linear-gradient(135deg, #eaf6ff 0%, #6fe0b0 50%, #4db8d4 100%);
@@ -527,10 +531,35 @@ export default function Hero() {
 
         .hero-description {
           font-size: 1.125rem;
-          line-height: 1.7;
+          font-weight: 200;
+          line-height: 2.1;
           /* 暖色柔光正文 */
           color: rgba(224, 240, 255, 0.82);
           margin: 0;
+        }
+
+        /* 滚动指示器 - 极简细线 */
+        .scroll-indicator {
+          position: absolute;
+          bottom: 12vh;
+          left: 50%;
+          transform: translateX(-50%);
+          width: 1px;
+          height: 64px;
+          background: linear-gradient(to bottom, rgba(224, 240, 255, 0.6), transparent);
+          opacity: 0.6;
+          animation: scroll-pulse 2.5s ease-in-out infinite;
+        }
+
+        @keyframes scroll-pulse {
+          0%, 100% {
+            opacity: 0.3;
+            transform: translateX(-50%) scaleY(0.6);
+          }
+          50% {
+            opacity: 0.8;
+            transform: translateX(-50%) scaleY(1);
+          }
         }
 
         .identity-tags {

@@ -1,4 +1,4 @@
-import{j as o}from"./jsx-runtime.u17CrQMm.js";import{a}from"./index.UEuQJ2Tp.js";const i=["♪","♫","♬","♩","♭","♮","♯"];function f({position:s="bottom-right"}){const n=a.useRef(null);a.useEffect(()=>{if(!n.current)return;const m=n.current,r=[];for(let t=0;t<8;t++){const e=document.createElement("span");e.textContent=i[t%i.length],e.style.cssText=`
+import{j as o}from"./jsx-runtime.u17CrQMm.js";import{a}from"./index.BpN8GsHY.js";const i=["♪","♫","♬","♩","♭","♮","♯"];function f({position:s="bottom-right"}){const n=a.useRef(null);a.useEffect(()=>{if(!n.current)return;const m=n.current,r=[];for(let t=0;t<8;t++){const e=document.createElement("span");e.textContent=i[t%i.length],e.style.cssText=`
         position: absolute;
         font-size: ${12+Math.random()*16}px;
         color: rgba(249, 115, 22, ${.3+Math.random()*.3});

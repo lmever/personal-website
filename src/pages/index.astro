@@ -6,6 +6,7 @@ import MicrosoftExperience from '../features/microsoft/MicrosoftExperience.tsx';
 import DatawhaleStory from '../features/datawhale/DatawhaleStory.astro';
 import Music from '../features/music/Music.astro';
 import MusicDecor from '../features/hero/MusicDecor.tsx';
+import FocusReveal from '../components/animations/FocusReveal.tsx';
 import site from '../data/site.json';
 import resume from '../data/resume.json';
 import FilmStrip from '../features/filmstrip/FilmStrip.astro';
@@ -28,49 +29,60 @@ const inspirationPreview = [
   <Container class="home-shell">
     <Hero client:load />
 
-    <MicrosoftExperience client:load />
+    <FocusReveal client:load>
+      <MicrosoftExperience client:load />
+    </FocusReveal>
 
-    <DatawhaleStory />
+    <FocusReveal client:load delay={0.1}>
+      <DatawhaleStory />
+    </FocusReveal>
 
     <section class="section-block music-block">
       <MusicDecor client:load position="top-left" />
       <MusicDecor client:load position="bottom-right" />
-      <Music />
+      <FocusReveal client:load>
+        <Music />
+      </FocusReveal>
     </section>
 
     <section id="projects" class="section-block">
-      <div class="section-heading split-heading">
-        <div>
-          <p class="eyebrow">Projects</p>
+      <FocusReveal client:load>
+        <div class="section-heading split-heading">
+          <div>
+            <p class="eyebrow">Projects</p>
+          </div>
+          <a class="section-link" href="/projects/">All projects →</a>
         </div>
-        <a class="section-link" href="/projects/">All projects →</a>
-      </div>
+      </FocusReveal>
 
       <div class="project-grid">
-        {featuredProjects.map((project) => (
-          <article class="project-card surface">
-            <div class="project-meta">
-              <span>{project.label}</span>
-              <span>{project.type}</span>
-            </div>
-            <h3>{project.name}</h3>
-            <p>{project.summary}</p>
-            <ul>
-              {project.tags.map((tag) => <li>{tag}</li>)}
-            </ul>
-          </article>
+        {featuredProjects.map((project, index) => (
+          <FocusReveal client:load delay={index * 0.15}>
+            <article class="project-card surface">
+              <div class="project-meta">
+                <span>{project.label}</span>
+                <span>{project.type}</span>
+              </div>
+              <h3>{project.name}</h3>
+              <p>{project.summary}</p>
+              <ul>
+                {project.tags.map((tag) => <li>{tag}</li>)}
+              </ul>
+            </article>
+          </FocusReveal>
         ))}
       </div>
     </section>
 
     <section class="section-block story-section" aria-labelledby="story-title">
-      <div class="story-card surface">
-        <p class="eyebrow">Personal philosophy</p>
-        <h2 id="story-title">Story is the interface</h2>
-        <p>
-          Tools become memorable when they carry a story: why they exist, what tension they resolve, and what kind of future they point toward. This site is the place where I connect engineering practice with creative memory.
-        </p>
-      </div>
+      <FocusReveal client:load>
+        <div class="story-card surface">
+          <h2 id="story-title">Story is the interface</h2>
+          <p>
+            Tools become memorable when they carry a story: why they exist, what tension they resolve, and what kind of future they point toward. This site is the place where I connect engineering practice with creative memory.
+          </p>
+        </div>
+      </FocusReveal>
     </section>
 
     <section id="experience" class="section-block">
@@ -79,14 +91,16 @@ const inspirationPreview = [
       </div>
 
       <div class="experience-list">
-        {resume.work.map((item) => (
-          <article class="experience-item surface">
-            <div>
-              <h3>{item.position}</h3>
-              <p class="company">{item.company}</p>
-              <p>{item.summary}</p>
-            </div>
-          </article>
+        {resume.work.map((item, index) => (
+          <FocusReveal client:load delay={index * 0.1}>
+            <article class="experience-item surface">
+              <div>
+                <h3>{item.position}</h3>
+                <p class="company">{item.company}</p>
+                <p>{item.summary}</p>
+              </div>
+            </article>
+          </FocusReveal>
         ))}
       </div>
     </section>
@@ -101,12 +115,14 @@ const inspirationPreview = [
       </div>
 
       <div class="inspiration-grid">
-        {inspirationPreview.map((item) => (
-          <article class="inspiration-card surface">
-            <span>{item.type}</span>
-            <h3>{item.title}</h3>
-            <p>{item.impact}</p>
-          </article>
+        {inspirationPreview.map((item, index) => (
+          <FocusReveal client:load delay={index * 0.15}>
+            <article class="inspiration-card surface">
+              <span>{item.type}</span>
+              <h3>{item.title}</h3>
+              <p>{item.impact}</p>
+            </article>
+          </FocusReveal>
         ))}
       </div>
     </section>

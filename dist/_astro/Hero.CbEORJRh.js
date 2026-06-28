@@ -1,11 +1,11 @@
-import{j as e}from"./jsx-runtime.u17CrQMm.js";import{a as o}from"./index.UEuQJ2Tp.js";const v=[{id:1,name:"chrome",radius:110,speed:.15,delay:0,orbitY:0,size:42},{id:2,name:"edge",radius:160,speed:.11,delay:2,orbitY:0,size:40},{id:3,name:"chery",radius:210,speed:.075,delay:4,orbitY:0,size:44}],N=[{label:"Research Consultant",href:"#code"},{label:"Independent AI Developer",href:"#code"},{label:"Tech Support",href:"#code"},{label:"Music Critic",href:"#influencer"},{label:"Poet",href:"#influencer"},{label:"Trader",href:"#code"}],y="#5fcf9f";function E(){const s=o.useRef(null),p=o.useRef(void 0),[i,u]=o.useState(!1),[x,b]=o.useState(!1);o.useEffect(()=>{const r=window.matchMedia("(prefers-reduced-motion: reduce)");u(r.matches);const t=a=>u(a.matches);return r.addEventListener("change",t),()=>r.removeEventListener("change",t)},[]),o.useEffect(()=>{if(i){b(!0);return}const r=setTimeout(()=>b(!0),2500);return()=>clearTimeout(r)},[i]),o.useEffect(()=>{if(i)return;const r=d=>{if(!s.current)return;const n=s.current.getBoundingClientRect(),l=n.left+n.width/2,f=n.top+n.height/2,c=(d.clientX-l)/(n.width/2),m=(d.clientY-f)/(n.height/2),h=c*12,g=-m*8;s.current.style.transform=`perspective(1000px) rotateX(${g}deg) rotateY(${h}deg)`},t=()=>{s.current&&(s.current.style.transform="perspective(1000px) rotateX(0deg) rotateY(0deg)")},a=s.current;return a&&(a.addEventListener("mousemove",r),a.addEventListener("mouseleave",t)),()=>{a&&(a.removeEventListener("mousemove",r),a.removeEventListener("mouseleave",t))}},[i]),o.useEffect(()=>{if(i)return;let r=null;const t=a=>{r||(r=a);const d=(a-r)/1e3;v.forEach(n=>{const l=document.getElementById(`orbit-logo-${n.id}`);if(!l)return;const c=(d*n.speed+n.delay)*(Math.PI*2),m=Math.cos(c)*n.radius,h=Math.sin(c)*n.radius,g=.9+(Math.sin(c)+1)*.05;l.style.transform=`translate(${m}px, ${h}px) scale(${g})`,l.style.zIndex=String(Math.floor(100+h))}),p.current=requestAnimationFrame(t)};return p.current=requestAnimationFrame(t),()=>{p.current&&cancelAnimationFrame(p.current)}},[i]);const w="lmever",j=(r,t)=>e.jsx("span",{className:"inline-block",children:r.split("").map((a,d)=>e.jsx("span",{className:`inline-block transition-all duration-500 ease-out ${x||i?"opacity-100 translate-y-0":"opacity-0 translate-y-8"}`,style:{transitionDelay:i?"0ms":`${(t+d)*80}ms`},children:a},d))});return e.jsxs("section",{id:"home",className:"hero-section","aria-labelledby":"hero-title",children:[e.jsxs("div",{className:"hero-container",children:[e.jsx("div",{className:"avatar-column",children:e.jsxs("div",{ref:s,className:"avatar-card",style:{transition:i?"none":"transform 0.15s ease-out"},children:[e.jsx("div",{className:"avatar-glow","aria-hidden":"true"}),e.jsxs("div",{className:"avatar-wrapper",children:[e.jsx("div",{className:"aurora-ring aurora-ring-1","aria-hidden":"true"}),e.jsx("div",{className:"aurora-ring aurora-ring-2","aria-hidden":"true"}),e.jsx("div",{className:"sound-wave-ring","aria-hidden":"true"}),e.jsx("div",{className:"sound-wave-ring","aria-hidden":"true"}),e.jsx("div",{className:"sound-wave-ring","aria-hidden":"true"}),e.jsx("div",{className:"orbit-guide-3","aria-hidden":"true"}),e.jsx("div",{className:"avatar-main",children:e.jsx("div",{className:"avatar-placeholder",children:e.jsx("img",{src:"/photos/portrait.jpg",alt:"Avatar",className:"avatar-image"})})}),v.map(r=>e.jsx("div",{id:`orbit-logo-${r.id}`,className:"orbit-logo",style:{position:"absolute",left:"50%",top:"50%",marginLeft:-r.size/2,marginTop:-r.size/2,width:r.size,height:r.size,display:"flex",alignItems:"center",justifyContent:"center",transform:"translateX(0) translateY(0)",transition:i?"none":"opacity 0.3s ease"},children:e.jsx("img",{src:r.name==="chrome"?"https://cdn.jsdelivr.net/npm/@browser-logos/chrome/chrome.svg":r.name==="edge"?"https://cdn.jsdelivr.net/npm/@browser-logos/edge/edge.svg":"/photos/chery.svg",alt:r.name,width:r.size,height:r.size,style:{filter:"drop-shadow(0 2px 8px rgba(0, 0, 0, 0.1))"}})},r.id))]}),e.jsx("div",{className:"card-corner card-corner-tl","aria-hidden":"true"}),e.jsx("div",{className:"card-corner card-corner-tr","aria-hidden":"true"}),e.jsx("div",{className:"card-corner card-corner-bl","aria-hidden":"true"}),e.jsx("div",{className:"card-corner card-corner-br","aria-hidden":"true"})]})}),e.jsx("div",{className:"identity-column",children:e.jsxs("div",{className:"identity-content",children:[e.jsx("p",{className:"eyebrow-text",children:"Welcome to my space"}),e.jsx("h1",{id:"hero-title",className:"hero-title",children:e.jsx("span",{className:"name-english",children:j(w,0)})}),e.jsx("p",{className:"hero-description",children:"I always listen, touched by others' stories. Now, I wish to share mine with you."}),e.jsx("div",{className:"identity-tags",children:N.map((r,t)=>e.jsx("a",{href:r.href,className:`identity-tag transition-all duration-300 ease-out ${x||i?"opacity-100 translate-y-0":"opacity-0 translate-y-4"}`,style:{transitionDelay:i?"0ms":`${1200+t*60}ms`},children:r.label},t))}),e.jsxs("div",{className:"hero-actions",children:[e.jsx("a",{href:"#code",className:"btn btn-primary",children:"View Projects"}),e.jsx("a",{href:"#influencer",className:"btn btn-secondary",children:"About Me"})]})]})})]}),e.jsx("style",{children:`
+import{j as e}from"./jsx-runtime.u17CrQMm.js";import{a as o}from"./index.BpN8GsHY.js";const v=[{id:1,name:"chrome",radius:110,speed:.15,delay:0,orbitY:0,size:42},{id:2,name:"edge",radius:160,speed:.11,delay:2,orbitY:0,size:40},{id:3,name:"chery",radius:210,speed:.075,delay:4,orbitY:0,size:44}],N=[{label:"Research Consultant",href:"#code"},{label:"Independent AI Developer",href:"#code"},{label:"Tech Support",href:"#code"},{label:"Music Critic",href:"#influencer"},{label:"Poet",href:"#influencer"},{label:"Trader",href:"#code"}],y="#5fcf9f";function E(){const s=o.useRef(null),p=o.useRef(void 0),[i,u]=o.useState(!1),[x,b]=o.useState(!1);o.useEffect(()=>{const r=window.matchMedia("(prefers-reduced-motion: reduce)");u(r.matches);const t=a=>u(a.matches);return r.addEventListener("change",t),()=>r.removeEventListener("change",t)},[]),o.useEffect(()=>{if(i){b(!0);return}const r=setTimeout(()=>b(!0),2500);return()=>clearTimeout(r)},[i]),o.useEffect(()=>{if(i)return;const r=d=>{if(!s.current)return;const n=s.current.getBoundingClientRect(),l=n.left+n.width/2,f=n.top+n.height/2,c=(d.clientX-l)/(n.width/2),m=(d.clientY-f)/(n.height/2),h=c*12,g=-m*8;s.current.style.transform=`perspective(1000px) rotateX(${g}deg) rotateY(${h}deg)`},t=()=>{s.current&&(s.current.style.transform="perspective(1000px) rotateX(0deg) rotateY(0deg)")},a=s.current;return a&&(a.addEventListener("mousemove",r),a.addEventListener("mouseleave",t)),()=>{a&&(a.removeEventListener("mousemove",r),a.removeEventListener("mouseleave",t))}},[i]),o.useEffect(()=>{if(i)return;let r=null;const t=a=>{r||(r=a);const d=(a-r)/1e3;v.forEach(n=>{const l=document.getElementById(`orbit-logo-${n.id}`);if(!l)return;const c=(d*n.speed+n.delay)*(Math.PI*2),m=Math.cos(c)*n.radius,h=Math.sin(c)*n.radius,g=.9+(Math.sin(c)+1)*.05;l.style.transform=`translate(${m}px, ${h}px) scale(${g})`,l.style.zIndex=String(Math.floor(100+h))}),p.current=requestAnimationFrame(t)};return p.current=requestAnimationFrame(t),()=>{p.current&&cancelAnimationFrame(p.current)}},[i]);const w="lmever",j=(r,t)=>e.jsx("span",{className:"inline-block",children:r.split("").map((a,d)=>e.jsx("span",{className:`inline-block transition-all duration-500 ease-out ${x||i?"opacity-100 translate-y-0":"opacity-0 translate-y-8"}`,style:{transitionDelay:i?"0ms":`${(t+d)*80}ms`},children:a},d))});return e.jsxs("section",{id:"home",className:"hero-section","aria-labelledby":"hero-title",children:[e.jsxs("div",{className:"hero-container",children:[e.jsx("div",{className:"avatar-column",children:e.jsxs("div",{ref:s,className:"avatar-card",style:{transition:i?"none":"transform 0.15s ease-out"},children:[e.jsx("div",{className:"avatar-glow","aria-hidden":"true"}),e.jsxs("div",{className:"avatar-wrapper",children:[e.jsx("div",{className:"aurora-ring aurora-ring-1","aria-hidden":"true"}),e.jsx("div",{className:"aurora-ring aurora-ring-2","aria-hidden":"true"}),e.jsx("div",{className:"sound-wave-ring","aria-hidden":"true"}),e.jsx("div",{className:"sound-wave-ring","aria-hidden":"true"}),e.jsx("div",{className:"sound-wave-ring","aria-hidden":"true"}),e.jsx("div",{className:"orbit-guide-3","aria-hidden":"true"}),e.jsx("div",{className:"avatar-main",children:e.jsx("div",{className:"avatar-placeholder",children:e.jsx("img",{src:"/photos/portrait.jpg",alt:"Avatar",className:"avatar-image"})})}),v.map(r=>e.jsx("div",{id:`orbit-logo-${r.id}`,className:"orbit-logo",style:{position:"absolute",left:"50%",top:"50%",marginLeft:-r.size/2,marginTop:-r.size/2,width:r.size,height:r.size,display:"flex",alignItems:"center",justifyContent:"center",transform:"translateX(0) translateY(0)",transition:i?"none":"opacity 0.3s ease"},children:e.jsx("img",{src:r.name==="chrome"?"https://cdn.jsdelivr.net/npm/@browser-logos/chrome/chrome.svg":r.name==="edge"?"https://cdn.jsdelivr.net/npm/@browser-logos/edge/edge.svg":"/photos/chery.svg",alt:r.name,width:r.size,height:r.size,style:{filter:"drop-shadow(0 2px 8px rgba(0, 0, 0, 0.1))"}})},r.id))]}),e.jsx("div",{className:"card-corner card-corner-tl","aria-hidden":"true"}),e.jsx("div",{className:"card-corner card-corner-tr","aria-hidden":"true"}),e.jsx("div",{className:"card-corner card-corner-bl","aria-hidden":"true"}),e.jsx("div",{className:"card-corner card-corner-br","aria-hidden":"true"})]})}),e.jsx("div",{className:"identity-column",children:e.jsxs("div",{className:"identity-content",children:[e.jsx("p",{className:"eyebrow-text",children:"Welcome to my space"}),e.jsx("h1",{id:"hero-title",className:"hero-title",children:e.jsx("span",{className:"name-english",children:j(w,0)})}),e.jsx("p",{className:"hero-description",children:"I always listen, touched by others' stories. Now, I wish to share mine with you."}),e.jsx("div",{className:"identity-tags",children:N.map((r,t)=>e.jsx("a",{href:r.href,className:`identity-tag transition-all duration-300 ease-out ${x||i?"opacity-100 translate-y-0":"opacity-0 translate-y-4"}`,style:{transitionDelay:i?"0ms":`${1200+t*60}ms`},children:r.label},t))}),e.jsxs("div",{className:"hero-actions",children:[e.jsx("a",{href:"#code",className:"btn btn-primary",children:"View Projects"}),e.jsx("a",{href:"#influencer",className:"btn btn-secondary",children:"About Me"})]})]})})]}),e.jsx("div",{className:"scroll-indicator","aria-hidden":"true"}),e.jsx("style",{children:`
         .hero-section {
           min-height: 100vh;
           display: flex;
-          align-items: center;
-          /* Account for fixed header height */
-          padding-top: 8rem;
-          padding-bottom: 4rem;
+          flex-direction: column;
+          /* 天宽地窄布局 - 顶部留白 20% 视口高度，内容占据 60% */
+          padding-top: 20vh;
+          padding-bottom: 8rem;
           position: relative;
         }
 
@@ -196,12 +196,12 @@ import{j as e}from"./jsx-runtime.u17CrQMm.js";import{a as o}from"./index.UEuQJ2T
         }
 
         .eyebrow-text {
-          /* 暖金引导文字 */
+          /* 暖金引导文字 - 细字重形成对比张力 */
           color: #6fe0b0;
-          font-family: var(--font-mono, 'SF Mono', monospace);
+          font-family: var(--font-serif);
           font-size: 0.875rem;
-          font-weight: 600;
-          letter-spacing: 0.15em;
+          font-weight: 200;
+          letter-spacing: 0.25em;
           text-transform: uppercase;
           margin: 0;
         }
@@ -212,8 +212,9 @@ import{j as e}from"./jsx-runtime.u17CrQMm.js";import{a as o}from"./index.UEuQJ2T
         }
 
         .name-english {
+          font-family: var(--font-serif);
           font-size: clamp(3.5rem, 10vw, 6rem);
-          font-weight: 800;
+          font-weight: 900;
           letter-spacing: -0.02em;
           /* 暖色渐变文字 - 暖白 → 金 → 暖橙 */
           background: linear-gradient(135deg, #eaf6ff 0%, #6fe0b0 50%, #4db8d4 100%);
@@ -224,10 +225,35 @@ import{j as e}from"./jsx-runtime.u17CrQMm.js";import{a as o}from"./index.UEuQJ2T
 
         .hero-description {
           font-size: 1.125rem;
-          line-height: 1.7;
+          font-weight: 200;
+          line-height: 2.1;
           /* 暖色柔光正文 */
           color: rgba(224, 240, 255, 0.82);
           margin: 0;
+        }
+
+        /* 滚动指示器 - 极简细线 */
+        .scroll-indicator {
+          position: absolute;
+          bottom: 12vh;
+          left: 50%;
+          transform: translateX(-50%);
+          width: 1px;
+          height: 64px;
+          background: linear-gradient(to bottom, rgba(224, 240, 255, 0.6), transparent);
+          opacity: 0.6;
+          animation: scroll-pulse 2.5s ease-in-out infinite;
+        }
+
+        @keyframes scroll-pulse {
+          0%, 100% {
+            opacity: 0.3;
+            transform: translateX(-50%) scaleY(0.6);
+          }
+          50% {
+            opacity: 0.8;
+            transform: translateX(-50%) scaleY(1);
+          }
         }
 
         .identity-tags {

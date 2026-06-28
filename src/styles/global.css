@@ -59,6 +59,7 @@
 
   /* 排版 - Typography */
   --font-sans: Inter, ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+  --font-serif: "Newsreader", Georgia, "Times New Roman", serif;
   --font-mono: "SFMono-Regular", Consolas, "Liberation Mono", monospace;
 
   /* 布局 - Layout */
@@ -93,13 +94,13 @@ body {
   overflow-x: hidden;
   /* 浅灰基底 + 细微渐变 */
   background:
-    radial-gradient(circle at 12% 12%, rgba(59, 130, 246, 0.04), transparent 30rem),
-    radial-gradient(circle at 88% 88%, rgba(16, 185, 129, 0.04), transparent 30rem),
+    radial-gradient(circle at 12% 12%, rgba(212, 197, 178, 0.06), transparent 30rem),
+    radial-gradient(circle at 88% 88%, rgba(178, 201, 212, 0.05), transparent 30rem),
     linear-gradient(180deg, #f5f5f7 0%, #ffffff 100%);
   color: var(--color-text-body);
   font-family: var(--font-sans);
   font-size: 16px;
-  line-height: 1.7;
+  line-height: 2;
   text-rendering: optimizeLegibility;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
@@ -185,7 +186,9 @@ h3 {
 
 h1 {
   max-width: 11ch;
+  font-family: var(--font-serif);
   font-size: clamp(4rem, 10vw, 9rem);
+  font-weight: 900;
   /* 钢琴渐变文字 - 黑到深蓝 */
   background: linear-gradient(135deg, #1a1a1a 0%, #3b82f6 50%, #10b981 100%);
   background-clip: text;
@@ -203,6 +206,16 @@ h3 {
 
 p {
   color: var(--color-muted);
+  line-height: 2.1;
+  max-width: 65ch;
+}
+
+/* Ensure paragraphs inside containers are centered */
+.prose p,
+.section-content p,
+.card-content p {
+  margin-left: auto;
+  margin-right: auto;
 }
 
 main {
@@ -249,19 +262,19 @@ section[id] {
 }
 
 .starfield::before {
-  /* 蓝绿星云淡彩 */
+  /* 莫兰迪色调星云淡彩 */
   background:
-    radial-gradient(ellipse at 22% 26%, rgba(59, 130, 246, 0.06), transparent 18%),
-    radial-gradient(ellipse at 72% 72%, rgba(16, 185, 129, 0.05), transparent 20%),
-    radial-gradient(ellipse at 58% 38%, rgba(201, 169, 98, 0.04), transparent 28%);
-  filter: blur(22px) saturate(1.2);
+    radial-gradient(ellipse at 22% 26%, rgba(212, 197, 178, 0.08), transparent 18%),
+    radial-gradient(ellipse at 72% 72%, rgba(178, 201, 212, 0.07), transparent 20%),
+    radial-gradient(ellipse at 58% 38%, rgba(190, 185, 195, 0.06), transparent 28%);
+  filter: blur(22px) saturate(0.8);
   opacity: 0.9;
   animation: sky-photo-pan 64s ease-in-out infinite alternate;
 }
 
 .starfield::after {
-  /* 顶部高光 */
-  background: linear-gradient(108deg, transparent 16%, rgba(255, 255, 255, 0.8) 32%, rgba(59, 130, 246, 0.03) 44%, rgba(16, 185, 129, 0.02) 56%, transparent 74%);
+  /* 顶部高光 - 莫兰迪色调 */
+  background: linear-gradient(108deg, transparent 16%, rgba(255, 255, 255, 0.8) 32%, rgba(212, 197, 178, 0.04) 44%, rgba(178, 201, 212, 0.03) 56%, transparent 74%);
   filter: blur(8px);
   opacity: 0.8;
   transform: rotate(-4deg);
@@ -400,9 +413,9 @@ body.has-space-top::after {
 
 .star-layer-near {
   background-image:
-    radial-gradient(circle, rgba(59, 130, 246, 0.5) 0 1px, transparent 1.8px),
-    radial-gradient(circle, rgba(16, 185, 129, 0.4) 0 1.1px, transparent 1.9px),
-    radial-gradient(circle, rgba(201, 169, 98, 0.3) 0 1px, transparent 1.7px);
+    radial-gradient(circle, rgba(178, 201, 212, 0.5) 0 1px, transparent 1.8px),
+    radial-gradient(circle, rgba(212, 197, 178, 0.4) 0 1.1px, transparent 1.9px),
+    radial-gradient(circle, rgba(190, 185, 195, 0.3) 0 1px, transparent 1.7px);
   background-position: 0 0, 58px 96px, 124px 34px;
   background-size: 220px 220px, 340px 340px, 420px 420px;
   animation: star-flow-near 38s linear infinite, star-twinkle 5.6s ease-in-out infinite alternate;
@@ -410,8 +423,8 @@ body.has-space-top::after {
 
 .star-layer-mid {
   background-image:
-    radial-gradient(circle, rgba(201, 169, 98, 0.25) 0 0.9px, transparent 1.5px),
-    radial-gradient(circle, rgba(59, 130, 246, 0.3) 0 0.9px, transparent 1.6px);
+    radial-gradient(circle, rgba(212, 197, 178, 0.25) 0 0.9px, transparent 1.5px),
+    radial-gradient(circle, rgba(178, 201, 212, 0.3) 0 0.9px, transparent 1.6px);
   background-position: 20px 30px, 140px 82px;
   background-size: 280px 280px, 460px 460px;
   opacity: 0.1;
@@ -420,8 +433,8 @@ body.has-space-top::after {
 
 .star-layer-far {
   background-image:
-    radial-gradient(circle, rgba(26, 26, 26, 0.15) 0 0.75px, transparent 1.4px),
-    radial-gradient(circle, rgba(59, 130, 246, 0.12) 0 0.8px, transparent 1.5px);
+    radial-gradient(circle, rgba(190, 185, 195, 0.15) 0 0.75px, transparent 1.4px),
+    radial-gradient(circle, rgba(178, 201, 212, 0.12) 0 0.8px, transparent 1.5px);
   background-position: 80px 120px, 8px 42px;
   background-size: 360px 360px, 560px 560px;
   opacity: 0.08;
@@ -442,24 +455,24 @@ body.has-space-top::after {
 .nebula-a {
   top: -20rem;
   left: -18rem;
-  /* 淡蓝星云 */
-  background: radial-gradient(ellipse at 36% 34%, rgba(59, 130, 246, 0.15), transparent 28%), radial-gradient(ellipse at 62% 56%, rgba(16, 185, 129, 0.1), transparent 42%);
+  /* 莫兰迪暖棕星云 */
+  background: radial-gradient(ellipse at 36% 34%, rgba(212, 197, 178, 0.2), transparent 28%), radial-gradient(ellipse at 62% 56%, rgba(178, 201, 212, 0.15), transparent 42%);
   animation: nebula-drift-a 34s ease-in-out infinite alternate;
 }
 
 .nebula-b {
   top: 3rem;
   right: -24rem;
-  /* 淡绿星云 */
-  background: radial-gradient(ellipse at 48% 45%, rgba(16, 185, 129, 0.12), transparent 34%), radial-gradient(ellipse at 38% 60%, rgba(59, 130, 246, 0.08), transparent 48%);
+  /* 莫兰迪灰蓝星云 */
+  background: radial-gradient(ellipse at 48% 45%, rgba(178, 201, 212, 0.18), transparent 34%), radial-gradient(ellipse at 38% 60%, rgba(190, 185, 195, 0.12), transparent 48%);
   animation: nebula-drift-b 42s ease-in-out infinite alternate;
 }
 
 .nebula-c {
   bottom: -28rem;
   left: 12%;
-  /* 淡金星云 */
-  background: radial-gradient(ellipse at 50% 40%, rgba(201, 169, 98, 0.1), transparent 30%), radial-gradient(ellipse at 56% 62%, rgba(59, 130, 246, 0.06), transparent 48%);
+  /* 莫兰迪灰紫星云 */
+  background: radial-gradient(ellipse at 50% 40%, rgba(190, 185, 195, 0.15), transparent 30%), radial-gradient(ellipse at 56% 62%, rgba(212, 197, 178, 0.1), transparent 48%);
   animation: nebula-drift-c 48s ease-in-out infinite alternate;
 }
 
@@ -470,9 +483,9 @@ body.has-space-top::after {
   height: 78%;
   transform: rotate(-16deg);
   border-radius: 50%;
-  /* 银河光带 - 蓝绿金混合 */
-  background: radial-gradient(ellipse at 45% 52%, rgba(59, 130, 246, 0.08) 0%, rgba(16, 185, 129, 0.06) 14%, rgba(201, 169, 98, 0.04) 32%, transparent 64%);
-  filter: blur(16px) saturate(1.2);
+  /* 银河光带 - 莫兰迪色调混合 */
+  background: radial-gradient(ellipse at 45% 52%, rgba(212, 197, 178, 0.1) 0%, rgba(178, 201, 212, 0.08) 14%, rgba(190, 185, 195, 0.06) 32%, transparent 64%);
+  filter: blur(16px) saturate(0.7);
   opacity: 0.6;
   animation: galaxy-breathe 26s ease-in-out infinite alternate;
 }
@@ -481,8 +494,8 @@ body.has-space-top::after {
   width: 16rem;
   height: 2px;
   border-radius: 999px;
-  /* 流星渐变 - 蓝到绿 */
-  background: linear-gradient(90deg, transparent, rgba(59, 130, 246, 0.4), rgba(16, 185, 129, 0.3), transparent);
+  /* 流星渐变 - 莫兰迪暖棕到灰蓝 */
+  background: linear-gradient(90deg, transparent, rgba(212, 197, 178, 0.5), rgba(178, 201, 212, 0.4), transparent);
   opacity: 0;
   transform: rotate(-28deg) translate3d(0, 0, 0);
 }
@@ -511,18 +524,18 @@ body.has-space-top::after {
   animation: float-orb 18s ease-in-out infinite alternate;
 }
 
-.ambient-orb-a { top: -8rem; left: -9rem; background: radial-gradient(circle, rgba(59, 130, 246, 0.15), transparent 68%); }
-.ambient-orb-b { top: 20rem; right: -12rem; background: radial-gradient(circle, rgba(16, 185, 129, 0.12), transparent 70%); animation-duration: 22s; animation-delay: -4s; }
-.ambient-orb-c { bottom: -14rem; left: 34%; width: 40rem; height: 40rem; background: radial-gradient(circle, rgba(201, 169, 98, 0.1), transparent 72%); animation-duration: 26s; animation-delay: -8s; }
+.ambient-orb-a { top: -8rem; left: -9rem; background: radial-gradient(circle, rgba(212, 197, 178, 0.2), transparent 68%); }
+.ambient-orb-b { top: 20rem; right: -12rem; background: radial-gradient(circle, rgba(178, 201, 212, 0.18), transparent 70%); animation-duration: 22s; animation-delay: -4s; }
+.ambient-orb-c { bottom: -14rem; left: 34%; width: 40rem; height: 40rem; background: radial-gradient(circle, rgba(190, 185, 195, 0.15), transparent 72%); animation-duration: 26s; animation-delay: -8s; }
 
 .ambient-grid {
   position: absolute;
   inset: auto 6vw 8vh auto;
   width: min(34vw, 26rem);
   aspect-ratio: 1;
-  border: 1px solid rgba(59, 130, 246, 0.08);
+  border: 1px solid rgba(212, 197, 178, 0.1);
   border-radius: 40% 60% 58% 42%;
-  background: linear-gradient(135deg, rgba(59, 130, 246, 0.03), transparent), repeating-linear-gradient(90deg, rgba(59, 130, 246, 0.02) 0 1px, transparent 1px 18px);
+  background: linear-gradient(135deg, rgba(178, 201, 212, 0.04), transparent), repeating-linear-gradient(90deg, rgba(190, 185, 195, 0.03) 0 1px, transparent 1px 18px);
   opacity: 0.5;
   animation: morph 20s ease-in-out infinite alternate;
 }
@@ -563,6 +576,42 @@ body.has-space-top::after {
     linear-gradient(315deg, rgba(201, 169, 98, 0.05) 0%, transparent 40%);
   opacity: 0.9;
   pointer-events: none;
+}
+
+/* 流光边框动画 - Light Stream Border */
+.surface::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  border-radius: var(--radius-xl);
+  padding: 1px;
+  background: conic-gradient(
+    from 0deg,
+    transparent 0%,
+    rgba(255, 255, 255, 0.8) 30%,
+    transparent 60%
+  );
+  -webkit-mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
+  mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
+  -webkit-mask-composite: xor;
+  mask-composite: exclude;
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity 0.3s ease;
+}
+
+.surface:hover::after {
+  opacity: 1;
+  animation: spin-slow 7s linear infinite;
+}
+
+@keyframes spin-slow {
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(360deg);
+  }
 }
 
 .surface:hover {

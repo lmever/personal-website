@@ -1,5 +1,6 @@
 ---
 // Music Section - Full width layout
+import MusicAnalytics from './MusicAnalytics';
 ---
 
 <div id="music" class="music-section">
@@ -39,6 +40,11 @@
         </div>
       </div>
     </article>
+  </div>
+
+  {/* Music Analytics Section */}
+  <div class="music-analytics-wrapper">
+    <MusicAnalytics client:load />
   </div>
 </div>
 
@@ -137,6 +143,11 @@
 
   .music-image-card:hover .image-overlay span {
     transform: translateY(0);
+  }
+
+  /* Analytics wrapper */
+  .music-analytics-wrapper {
+    margin-top: var(--space-6);
   }
 
   /* Responsive */
